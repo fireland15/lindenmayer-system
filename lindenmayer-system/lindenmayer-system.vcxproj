@@ -151,11 +151,6 @@
     <ClInclude Include="LindenmayerSymbol.h" />
     <ClInclude Include="Production.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\expression-evaluator\expression-evaluator.vcxproj">
-      <Project>{ba341f9f-f0c8-47b9-b542-92eba144aa93}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
