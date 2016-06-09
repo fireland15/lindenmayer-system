@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expression-evaluator", "exp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expression-evaluator-test", "expression-evaluator-test\expression-evaluator-test.vcxproj", "{DCF94A24-936C-4B10-8437-789773C9B737}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lindenmayer-system-test", "lindenmayer-system-test\lindenmayer-system-test.vcxproj", "{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{DCF94A24-936C-4B10-8437-789773C9B737}.Release|x64.Build.0 = Release|x64
 		{DCF94A24-936C-4B10-8437-789773C9B737}.Release|x86.ActiveCfg = Release|Win32
 		{DCF94A24-936C-4B10-8437-789773C9B737}.Release|x86.Build.0 = Release|Win32
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Debug|x64.ActiveCfg = Debug|x64
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Debug|x64.Build.0 = Debug|x64
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Debug|x86.ActiveCfg = Debug|Win32
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Debug|x86.Build.0 = Debug|Win32
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Release|x64.ActiveCfg = Release|x64
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Release|x64.Build.0 = Release|x64
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Release|x86.ActiveCfg = Release|Win32
+		{2E1ABC99-75D6-4556-8E87-9B866BFF9DAF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,7 +23,6 @@ public:
 		bool lookAheadResult = TestPostContext(std::next(it));
 	}
 
-private:
 	bool TestPreContext(Iterator it) {
 		auto contextIterator = m_preContext.rbegin();
 

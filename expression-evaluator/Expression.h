@@ -56,7 +56,6 @@ public:
 
 		TokenList postfix = m_converter(tokens);
 
-		ExpressionNode* root;
 		std::stack<ExpressionNode*> nodeStk;
 
 		auto it = postfix.begin();
