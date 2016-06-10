@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../expression-evaluator/Expression.h"
+#include "../expression-evaluator/expression.h"
+#include "../expression-evaluator/expression-builder.h"
 
 #include <map>
 

@@ -84,7 +84,7 @@ namespace Test {
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(MultipleOperators) {
@@ -111,9 +111,9 @@ namespace Test {
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
 			Assert::AreEqual("C", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::sub, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::sub, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(MultipleOperatorsDifferentAssociativity) {
@@ -141,8 +141,8 @@ namespace Test {
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
 			Assert::AreEqual("C", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::mul, (int)(*it++).OperatorType());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::mul, (int)(*it++).Operator());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(SimpleParenthesis) {
@@ -169,7 +169,7 @@ namespace Test {
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(LessSimpleParenthesis) {
@@ -198,9 +198,9 @@ namespace Test {
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
 			Assert::AreEqual(3.0f, (*it++).Value());
-			Assert::AreEqual((int)OperatorType::mul, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::mul, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(TwoSetsOfParenthesis) {
@@ -233,11 +233,11 @@ namespace Test {
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
-			Assert::AreEqual((int)OperatorType::mul, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
+			Assert::AreEqual((int)OperatorType::mul, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(NestedParenthesis) {
@@ -269,8 +269,8 @@ namespace Test {
 			Assert::AreEqual("C", (*it++).Symbol().c_str());
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it).Operator());
 		}
 
 		TEST_METHOD(DifferentAssociations) {
@@ -295,9 +295,9 @@ namespace Test {
 
 			auto it = result.begin();
 			Assert::AreEqual("A", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::neg, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::neg, (int)(*it++).Operator());
 			Assert::AreEqual("B", (*it++).Symbol().c_str());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it).Operator());
 		}
 	};
 }

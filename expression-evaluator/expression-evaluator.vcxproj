@@ -130,15 +130,34 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Exceptions.h" />
-    <ClInclude Include="Expression.h" />
-    <ClInclude Include="ExpressionNodes.h" />
-    <ClInclude Include="ExpressionTokenizer.h" />
-    <ClInclude Include="InfixToPostfixConverter.h" />
-    <ClInclude Include="Token.h" />
+    <ClInclude Include="binary-operator-node.h" />
+    <ClInclude Include="exceptions.h" />
+    <ClInclude Include="expression-builder.h" />
+    <ClInclude Include="expression-node-builder.h" />
+    <ClInclude Include="expression-node.h" />
+    <ClInclude Include="expression.h" />
+    <ClInclude Include="expression-tokenizer.h" />
+    <ClInclude Include="infix-to-postfix-converter.h" />
+    <ClInclude Include="operator-node.h" />
+    <ClInclude Include="operator-type.h" />
+    <ClInclude Include="token.h" />
+    <ClInclude Include="token-type.h" />
+    <ClInclude Include="unary-operator-node.h" />
+    <ClInclude Include="value-node.h" />
+    <ClInclude Include="variable-node.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exceptions.cpp" />
+    <ClCompile Include="binary-operator-node.cpp" />
+    <ClCompile Include="exceptions.cpp" />
+    <ClCompile Include="expression-builder.cpp" />
+    <ClCompile Include="expression-node-builder.cpp" />
+    <ClCompile Include="expression-tokenizer.cpp" />
+    <ClCompile Include="expression.cpp" />
+    <ClCompile Include="infix-to-postfix-converter.cpp" />
+    <ClCompile Include="token.cpp" />
+    <ClCompile Include="unary-operator-node.cpp" />
+    <ClCompile Include="value-node.cpp" />
+    <ClCompile Include="variable-node.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

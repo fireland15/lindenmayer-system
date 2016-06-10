@@ -40,7 +40,7 @@ namespace Test {
 
 			Assert::AreEqual(1, (int)result.size());
 			Assert::AreEqual((int)(TokenType::Operator), (int)(result.front().Type()));
-			Assert::AreEqual((int)OperatorType::add, (int)(result.front().OperatorType()));
+			Assert::AreEqual((int)OperatorType::add, (int)(result.front().Operator()));
 		}
 
 		TEST_METHOD(CreatesVariableToken) {
@@ -161,7 +161,7 @@ namespace Test {
 			Assert::AreEqual(3.14159f, (*it++).Value());
 
 			Assert::AreEqual((int)TokenType::Operator, (int)(*it).Type());
-			Assert::AreEqual((int)OperatorType::add, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::add, (int)(*it++).Operator());
 
 			Assert::AreEqual((int)TokenType::Identifier, (int)(*it).Type());
 			Assert::AreEqual(std::string("c"), (*it++).Symbol());
@@ -169,7 +169,7 @@ namespace Test {
 			Assert::AreEqual((int)(TokenType::RParen), (int)(*it++).Type());
 
 			Assert::AreEqual((int)TokenType::Operator, (int)(*it).Type());
-			Assert::AreEqual((int)OperatorType::div, (int)(*it++).OperatorType());
+			Assert::AreEqual((int)OperatorType::div, (int)(*it++).Operator());
 
 			Assert::AreEqual((int)TokenType::Value, (int)(*it).Type());
 			Assert::AreEqual(3.00f, (*it++).Value());

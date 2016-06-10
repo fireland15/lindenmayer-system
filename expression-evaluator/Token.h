@@ -2,30 +2,8 @@
 
 #include <string>
 
-enum class Associativity { left, right };
-enum class Precedence { lowest, low, mid, high, highest };
-
-enum class OperatorType : unsigned int {
-	neg,
-	add,
-	sub,
-	mul,
-	div,
-	eq, // equal
-	neq, // not equal
-	gt, // greater than
-	lt, // less than
-	geq, // greater than or equal
-	leq // less than or equal
-};
-
-enum class TokenType : unsigned int {
-	Value,
-	Identifier,
-	Operator,
-	LParen,
-	RParen
-};
+#include "token-type.h"
+#include "operator-type.h"
 
 class Token {
 private:
@@ -35,13 +13,13 @@ private:
 	float m_value;
 
 public:
-	Token(float value) : m_type(TokenType::Value), m_value(value) { } // value
-	Token(OperatorType opType) : m_type(TokenType::Operator), m_opType(opType) { } // operator
-	Token(std::string symbol) : m_type(TokenType::Identifier), m_symbol(symbol) { } // variable
-	Token(TokenType type) : m_type(type) { }
+	Token(float value);
+	Token(OperatorType opType);
+	Token(std::string symbol);
+	Token(TokenType type);
 
-	TokenType Type() const { return m_type; }
-	OperatorType OperatorType() const { return m_opType; }
-	std::string Symbol() const { return m_symbol; }
-	float Value() const { return m_value; }
+	TokenType Type() const;
+	OperatorType Operator() const;
+	std::string Symbol() const;
+	float Value() const;
 };

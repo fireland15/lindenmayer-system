@@ -18,27 +18,84 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Token.h">
+    <ClInclude Include="expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exceptions.h">
+    <ClInclude Include="expression-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Expression.h">
+    <ClInclude Include="expression-node-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExpressionNodes.h">
+    <ClInclude Include="expression-node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExpressionTokenizer.h">
+    <ClInclude Include="operator-node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InfixToPostfixConverter.h">
+    <ClInclude Include="unary-operator-node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="binary-operator-node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="value-node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="variable-node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="token-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="operator-type.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="infix-to-postfix-converter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="expression-tokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Exceptions.cpp">
+    <ClCompile Include="expression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expression-builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="infix-to-postfix-converter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expression-tokenizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expression-node-builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unary-operator-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="binary-operator-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="value-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="variable-node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="token.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exceptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

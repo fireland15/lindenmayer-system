@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../expression-evaluator/ExpressionNodes.h"
+#include "../expression-evaluator/expression-node-builder.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
