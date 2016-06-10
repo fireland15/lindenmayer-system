@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../expression-evaluator/ExpressionTokenizer.h"
+#include "../expression-evaluator/expression-tokenizer.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

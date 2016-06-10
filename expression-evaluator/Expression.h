@@ -10,8 +10,8 @@
 #include "expression-node.h"
 #include "variable-node.h"
 #include "Exceptions.h"
-#include "InfixToPostfixConverter.h"
-#include "ExpressionTokenizer.h"
+#include "infix-to-postfix-converter.h"
+#include "expression-tokenizer.h"
 
 class Expression {
 private:

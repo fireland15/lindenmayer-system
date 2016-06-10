@@ -1,4 +1,4 @@
-#include "ExpressionTokenizer.h"
+#include "expression-tokenizer.h"
 
 ExpressionTokenizer::ExpressionTokenizer(OperatorMap& operatorMap)
 	: m_operatorMap(operatorMap) { }

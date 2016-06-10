@@ -146,10 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ContextInspector.h" />
-    <ClInclude Include="LindenmayerString.h" />
-    <ClInclude Include="LindenmayerSymbol.h" />
-    <ClInclude Include="Production.h" />
+    <ClInclude Include="context-inspector.h" />
+    <ClInclude Include="lindenmayer-string.h" />
+    <ClInclude Include="lindenmayer-symbol.h" />
+    <ClInclude Include="production.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

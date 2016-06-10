@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LindenmayerSymbol.h"
+#include "lindenmayer-symbol.h"
 
 #include <stdexcept>
 #include <list>

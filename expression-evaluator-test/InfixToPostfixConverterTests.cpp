@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../expression-evaluator/InfixToPostfixConverter.h"
+#include "../expression-evaluator/infix-to-postfix-converter.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

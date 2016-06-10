@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Production.h">
+    <ClInclude Include="context-inspector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LindenmayerString.h">
+    <ClInclude Include="lindenmayer-string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LindenmayerSymbol.h">
+    <ClInclude Include="production.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ContextInspector.h">
+    <ClInclude Include="lindenmayer-symbol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

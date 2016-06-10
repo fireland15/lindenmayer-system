@@ -1,4 +1,4 @@
-#include "InfixToPostfixConverter.h"
+#include "infix-to-postfix-converter.h"
 
 InfixToPostfixConverter::InfixToPostfixConverter(std::map<OperatorType, std::pair<Associativity, Precedence>>& operatorMap)
 	: m_operatorMap(operatorMap) { }
