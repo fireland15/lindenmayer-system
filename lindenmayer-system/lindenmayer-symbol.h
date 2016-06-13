@@ -1,8 +1,14 @@
 #pragma once
 
-class LindenmayerSymbol {
-private:
+#include <vector>
 
-public:
+#include "../expression-evaluator/expression.h"
+
+struct LindenmayerSymbol {
 	char symbol;
+	std::vector<float> parameters;
+
+	std::string ToString() {
+		throw std::exception();
+	}
 };

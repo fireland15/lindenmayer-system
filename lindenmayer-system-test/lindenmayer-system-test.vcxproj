@@ -158,15 +158,20 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lindenmayer-symbol-builder-tests.cpp" />
+    <ClCompile Include="production-result-builder-tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ContextInspectorTests.cpp" />
+    <ClCompile Include="context-inspector-tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\expression-evaluator\expression-evaluator.vcxproj">
+      <Project>{65bacffe-b5fa-4372-99bd-18dd9c46f901}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\lindenmayer-system\lindenmayer-system.vcxproj">
       <Project>{c24229bf-ecab-432a-94b3-cdab3a8d5aa5}</Project>
     </ProjectReference>

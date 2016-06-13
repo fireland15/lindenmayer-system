@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <list>
 
-template<typename Iterator>
 class ContextInspector {
 	std::list<LindenmayerSymbol> m_preContext;
 	std::list<LindenmayerSymbol> m_postContext;
@@ -15,6 +14,7 @@ public:
 
 	}
 
+	template<typename Iterator>
 	bool TestContext(Iterator it) {
 		// Todo: Implement context tests
 		throw std::exception("Not Implemented");
@@ -23,6 +23,7 @@ public:
 		bool lookAheadResult = TestPostContext(std::next(it));
 	}
 
+	template<typename Iterator>
 	bool TestPreContext(Iterator it) {
 		auto contextIterator = m_preContext.rbegin();
 
@@ -36,6 +37,7 @@ public:
 		return true;
 	}
 
+	template<typename Iterator>
 	bool TestPostContext(Iterator it) {
 		auto contextIterator = m_postContext.begin();
 

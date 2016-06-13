@@ -14,7 +14,7 @@ namespace lindenmayersystemtest
 		TEST_METHOD(TestPreContext)
 		{
 			std::list<LindenmayerSymbol> preContext;
-			preContext.push_back(LindenmayerSymbol{'a'});
+			//preContext.push_back();
 		}
 
 	};

@@ -26,7 +26,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ContextInspectorTests.cpp">
+    <ClCompile Include="context-inspector-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lindenmayer-symbol-builder-tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="production-result-builder-tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

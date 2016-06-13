@@ -27,5 +27,17 @@
     <ClInclude Include="lindenmayer-symbol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lindenmayer-symbol-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lindenmayer-production.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="context-inspector-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lindenmayer-production-result-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

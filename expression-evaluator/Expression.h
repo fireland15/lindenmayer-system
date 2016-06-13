@@ -20,6 +20,7 @@ private:
 	float m_result;
 
 public:
+	Expression() { }
 	Expression(ExpressionNode* expressionTree, std::map<std::string, std::list<VariableNode*>> variableMap);
 
 	float Evaluate();
