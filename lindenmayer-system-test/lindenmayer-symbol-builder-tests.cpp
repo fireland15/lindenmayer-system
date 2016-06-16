@@ -16,8 +16,8 @@ namespace lindenmayersystemtest {
 			LindenmayerSymbolBuilder builder('a');
 			LindenmayerSymbol symbol = builder.BuildSymbol();
 
-			Assert::AreEqual('a', symbol.symbol);
-			Assert::AreEqual((size_t)0, symbol.parameters.size());
+			Assert::AreEqual('a', symbol.GetSymbol());
+			Assert::AreEqual((size_t)0, symbol.GetParameters().size());
 		}
 
 		TEST_METHOD(SingleParameter) {
@@ -27,9 +27,9 @@ namespace lindenmayersystemtest {
 			LindenmayerSymbolBuilder builder('a', { exp });
 			LindenmayerSymbol symbol = builder.BuildSymbol();
 
-			Assert::AreEqual('a', symbol.symbol);
-			Assert::AreEqual((size_t)1, symbol.parameters.size());
-			Assert::AreEqual(4.0f, symbol.parameters[0]);
+			Assert::AreEqual('a', symbol.GetSymbol());
+			Assert::AreEqual((size_t)1, symbol.GetParameters().size());
+			Assert::AreEqual(4.0f, symbol.GetParameters()[0]);
 		}
 
 		TEST_METHOD(TwoParameters) {
@@ -41,10 +41,10 @@ namespace lindenmayersystemtest {
 			LindenmayerSymbolBuilder builder('a', { exp1, exp2 });
 			LindenmayerSymbol symbol = builder.BuildSymbol();
 
-			Assert::AreEqual('a', symbol.symbol);
-			Assert::AreEqual((size_t)2, symbol.parameters.size());
-			Assert::AreEqual(4.0f, symbol.parameters[0]);
-			Assert::AreEqual(5.40625f, symbol.parameters[1]);
+			Assert::AreEqual('a', symbol.GetSymbol());
+			Assert::AreEqual((size_t)2, symbol.GetParameters().size());
+			Assert::AreEqual(4.0f, symbol.GetParameters()[0]);
+			Assert::AreEqual(5.40625f, symbol.GetParameters()[1]);
 		}
 
 		TEST_METHOD(ThreeParameters) {
@@ -57,11 +57,11 @@ namespace lindenmayersystemtest {
 			LindenmayerSymbolBuilder builder('a', { exp1, exp2, exp3 });
 			LindenmayerSymbol symbol = builder.BuildSymbol();
 
-			Assert::AreEqual('a', symbol.symbol);
-			Assert::AreEqual((size_t)3, symbol.parameters.size());
-			Assert::AreEqual(4.0f, symbol.parameters[0]);
-			Assert::AreEqual(5.40625f, symbol.parameters[1]);
-			Assert::AreEqual(93.0f, symbol.parameters[2]);
+			Assert::AreEqual('a', symbol.GetSymbol());
+			Assert::AreEqual((size_t)3, symbol.GetParameters().size());
+			Assert::AreEqual(4.0f, symbol.GetParameters()[0]);
+			Assert::AreEqual(5.40625f, symbol.GetParameters()[1]);
+			Assert::AreEqual(93.0f, symbol.GetParameters()[2]);
 		}
 
 		TEST_METHOD(TwoSymbolsDifferentValues) {
@@ -75,8 +75,8 @@ namespace lindenmayersystemtest {
 			builder.PassParameter("x", 7.0f);
 			LindenmayerSymbol symbol2 = builder.BuildSymbol();
 
-			Assert::AreEqual(5.0f, symbol1.parameters[0]);
-			Assert::AreEqual(10.0f, symbol2.parameters[0]);
+			Assert::AreEqual(5.0f, symbol1.GetParameters()[0]);
+			Assert::AreEqual(10.0f, symbol2.GetParameters()[0]);
 		}
 	};
 }

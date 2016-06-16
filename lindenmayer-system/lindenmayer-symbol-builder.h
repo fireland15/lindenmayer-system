@@ -25,13 +25,11 @@ public:
 	LindenmayerSymbol BuildSymbol() {
 		size_t numParameters = m_parameterExpressions.size();
 
-		LindenmayerSymbol symbol;
-		symbol.symbol = m_symbol;
-		symbol.parameters = std::vector<float>(numParameters);
+		LindenmayerSymbol symbol(m_symbol, std::vector<float>(numParameters));
 
 		for (unsigned int i = 0; i < m_parameterExpressions.size(); i++) {
 			m_parameterExpressions[i].Evaluate();
-			symbol.parameters[i] = m_parameterExpressions[i].GetResult();
+			symbol.GetParameters()[i] = m_parameterExpressions[i].GetResult();
 		}
 
 		return symbol;

@@ -17,7 +17,7 @@ public:
 
 		for (LindenmayerSymbolBuilder builder : m_symbolBuilders) {
 			char param = 'a';
-			for (float value : symbol.parameters) {
+			for (float value : symbol.GetParameters()) {
 				builder.PassParameter(std::string(1, param++), value);
 			}
 

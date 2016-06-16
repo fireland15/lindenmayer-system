@@ -1,52 +1,71 @@
 #pragma once
 
 #include "lindenmayer-symbol.h"
+#include "lindenmayer-string.h"
 
 #include <stdexcept>
 #include <list>
 
+typedef std::vector<LindenmayerSymbol> vSymbols_t;
+
 class ContextInspector {
-	std::list<LindenmayerSymbol> m_preContext;
-	std::list<LindenmayerSymbol> m_postContext;
+	LindenmayerString* m_preContext;
+	LindenmayerString* m_postContext;
+
 public:
-	ContextInspector(std::list<LindenmayerSymbol> preContext, std::list<LindenmayerSymbol> postContext)
-		: m_preContext(preContext), m_postContext(postContext) {
-
+	ContextInspector() {
+		m_preContext = nullptr;
+		m_postContext = nullptr;
 	}
 
-	template<typename Iterator>
-	bool TestContext(Iterator it) {
-		// Todo: Implement context tests
-		throw std::exception("Not Implemented");
+	ContextInspector(LindenmayerString* preContext, LindenmayerString* postContext)
+		: m_preContext(preContext), m_postContext(postContext) { }
 
-		bool lookBehindResult = TestPreContext(std::prev(it));
-		bool lookAheadResult = TestPostContext(std::next(it));
+	~ContextInspector() {
+		if (m_preContext != nullptr)
+			delete m_preContext;
+
+		if (m_postContext != nullptr)
+			delete m_postContext;
 	}
 
-	template<typename Iterator>
-	bool TestPreContext(Iterator it) {
-		auto contextIterator = m_preContext.rbegin();
+	bool TestContext(vSymbols_t::iterator begin, vSymbols_t::iterator it, vSymbols_t::iterator end) {
+		bool lookBehindResult = TestPreContext(begin, it);
+		bool lookAheadResult = TestPostContext(it, end);
+		return lookAheadResult && lookBehindResult;
+	}
 
-		for (contextIterator; contextIterator != m_preContext.rend(); ++contextIterator) {
-			if (contextIterator->symbol != it->symbol) {
-				return false;
-			}
-			--it;
-		}
+	bool TestPreContext(vSymbols_t::iterator begin, vSymbols_t::iterator it) {
+		//if (m_preContext == nullptr)
+		//	return true;
+
+		//auto rBegin = std::reverse_iterator<vSymbols_t::iterator>(begin);
+		//auto rIt = std::reverse_iterator<vSymbols_t::iterator>(it);
+
+		//auto contextIterator = m_preContext->rBegin();
+
+		//while (rIt != rBegin && contextIterator != m_preContext->rEnd()) {
+		//	if (rIt->symbol != contextIterator->symbol)
+		//		return false;
+		//	++rIt;
+		//}
 
 		return true;
 	}
 
-	template<typename Iterator>
-	bool TestPostContext(Iterator it) {
-		auto contextIterator = m_postContext.begin();
+	bool TestPostContext(vSymbols_t::iterator it, vSymbols_t::iterator end) {
+		//if (m_postContext == nullptr)
+		//	return true;
 
-		for (contextIterator; contextIterator != m_postContext.end(); ++contextIterator) {
-			if (contextIterator->symbol != it->symbol) {
-				return false;
-			}
-			++it;
-		}
+		//it = std::next(it);
+
+		//auto contextIterator = m_postContext->Begin();
+
+		//while (it != end && contextIterator != m_postContext->End()) {
+		//	if (it->symbol != contextIterator->symbol)
+		//		return false;
+		//	++it;
+		//}
 
 		return true;
 	}

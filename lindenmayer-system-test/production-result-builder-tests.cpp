@@ -3,7 +3,7 @@
 
 #include "../expression-evaluator/expression-builder.h"
 #include "../lindenmayer-system/lindenmayer-symbol-builder.h"
-#include "../lindenmayer-system/lindenmayer-production-result-builder.h"
+#include "../lindenmayer-system/production-result-generator.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -12,8 +12,8 @@ namespace lindenmayersystemtest {
 	public:
 		TEST_METHOD(ZeroSymbolsBuild) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'a';
-			symbol.parameters = { 3.0f, 5.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			ProductionResultGenerator generator({});
 
@@ -24,8 +24,8 @@ namespace lindenmayersystemtest {
 
 		TEST_METHOD(SingleSymbolBuild) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			LindenmayerSymbolBuilder builder('v');
 
@@ -34,13 +34,13 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].symbol);
+			Assert::AreEqual('v', result[0].GetSymbol());
 		}
 
 		TEST_METHOD(TwoSymbolBuild) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			LindenmayerSymbolBuilder builder1('v');
 			LindenmayerSymbolBuilder builder2('t');
@@ -50,14 +50,14 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)2, result.size());
-			Assert::AreEqual('v', result[0].symbol);
-			Assert::AreEqual('t', result[1].symbol);
+			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual('t', result[1].GetSymbol());
 		}
 
 		TEST_METHOD(ThreeSymbolBuild) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			LindenmayerSymbolBuilder builder1('v');
 			LindenmayerSymbolBuilder builder2('t');
@@ -68,15 +68,15 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)3, result.size());
-			Assert::AreEqual('v', result[0].symbol);
-			Assert::AreEqual('t', result[1].symbol);
-			Assert::AreEqual('g', result[2].symbol);
+			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual('t', result[1].GetSymbol());
+			Assert::AreEqual('g', result[2].GetSymbol());
 		}
 
 		TEST_METHOD(BuildSymbolWithOneParameter) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			ExpressionBuilder expBldr;
 			Expression exp = expBldr.Build("a + b");
@@ -88,15 +88,15 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].symbol);
-			Assert::AreEqual((size_t)1, result[0].parameters.size());
-			Assert::AreEqual(9.0f, result[0].parameters[0]);
+			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual((size_t)1, result[0].GetParameters().size());
+			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
 		}
 
 		TEST_METHOD(BuildSymbolWithTwoParameters) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			ExpressionBuilder expBldr;
 			Expression exp1 = expBldr.Build("a + b");
@@ -109,16 +109,16 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].symbol);
-			Assert::AreEqual((size_t)2, result[0].parameters.size());
-			Assert::AreEqual(9.0f, result[0].parameters[0]);
-			Assert::AreEqual(9.0f, result[0].parameters[1]);
+			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual((size_t)2, result[0].GetParameters().size());
+			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
+			Assert::AreEqual(9.0f, result[0].GetParameters()[1]);
 		}
 
 		TEST_METHOD(BuildSymbolWithThreeParameters) {
 			LindenmayerSymbol symbol;
-			symbol.symbol = 'b';
-			symbol.parameters = { 3.0f, 6.0f };
+			symbol.SetSymbol('b');
+			symbol.SetParameters({ 3.0f, 6.0f });
 
 			ExpressionBuilder expBldr;
 			Expression exp1 = expBldr.Build("a + b");
@@ -132,11 +132,11 @@ namespace lindenmayersystemtest {
 			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
 
 			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].symbol);
-			Assert::AreEqual((size_t)3, result[0].parameters.size());
-			Assert::AreEqual(9.0f, result[0].parameters[0]);
-			Assert::AreEqual(9.0f, result[0].parameters[1]);
-			Assert::AreEqual(2.0f, result[0].parameters[2]);
+			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual((size_t)3, result[0].GetParameters().size());
+			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
+			Assert::AreEqual(9.0f, result[0].GetParameters()[1]);
+			Assert::AreEqual(2.0f, result[0].GetParameters()[2]);
 		}
 	};
 }

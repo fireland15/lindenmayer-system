@@ -148,7 +148,7 @@
   <ItemGroup>
     <ClInclude Include="context-inspector-builder.h" />
     <ClInclude Include="context-inspector.h" />
-    <ClInclude Include="lindenmayer-production-result-builder.h" />
+    <ClInclude Include="production-result-generator.h" />
     <ClInclude Include="lindenmayer-production.h" />
     <ClInclude Include="lindenmayer-string.h" />
     <ClInclude Include="lindenmayer-symbol-builder.h" />
