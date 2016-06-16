@@ -29,44 +29,23 @@ public:
 			delete m_postContext;
 	}
 
-	bool TestContext(vSymbols_t::iterator begin, vSymbols_t::iterator it, vSymbols_t::iterator end) {
-		bool lookBehindResult = TestPreContext(begin, it);
-		bool lookAheadResult = TestPostContext(it, end);
+	bool TestContext(unsigned int pos, LindenmayerString& string) {
+		bool lookBehindResult = TestPreContext(pos, string);
+		bool lookAheadResult = TestPostContext(pos, string);
 		return lookAheadResult && lookBehindResult;
 	}
 
-	bool TestPreContext(vSymbols_t::iterator begin, vSymbols_t::iterator it) {
-		//if (m_preContext == nullptr)
-		//	return true;
+	bool TestPreContext(unsigned int pos, LindenmayerString& string) {
+		if (m_preContext == nullptr)
+			return true;
 
-		//auto rBegin = std::reverse_iterator<vSymbols_t::iterator>(begin);
-		//auto rIt = std::reverse_iterator<vSymbols_t::iterator>(it);
-
-		//auto contextIterator = m_preContext->rBegin();
-
-		//while (rIt != rBegin && contextIterator != m_preContext->rEnd()) {
-		//	if (rIt->symbol != contextIterator->symbol)
-		//		return false;
-		//	++rIt;
-		//}
-
-		return true;
+		return string.CompareBehind(pos - 1, *m_preContext);
 	}
 
-	bool TestPostContext(vSymbols_t::iterator it, vSymbols_t::iterator end) {
-		//if (m_postContext == nullptr)
-		//	return true;
+	bool TestPostContext(unsigned int pos, LindenmayerString& string) {
+		if (m_postContext == nullptr)
+			return true;
 
-		//it = std::next(it);
-
-		//auto contextIterator = m_postContext->Begin();
-
-		//while (it != end && contextIterator != m_postContext->End()) {
-		//	if (it->symbol != contextIterator->symbol)
-		//		return false;
-		//	++it;
-		//}
-
-		return true;
+		return string.CompareAhead(pos + 1, *m_postContext);
 	}
 };
