@@ -18,7 +18,7 @@ namespace lindenmayersystemtest {
 			str.Add(LindenmayerSymbol('f'));
 
 			ContextInspector inspector(nullptr, nullptr);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(true, result);
 		}
@@ -37,7 +37,7 @@ namespace lindenmayersystemtest {
 			preContext->Add(LindenmayerSymbol('b'));
 
 			ContextInspector inspector(preContext, nullptr);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(true, result);
 		}
@@ -56,7 +56,7 @@ namespace lindenmayersystemtest {
 			preContext->Add(LindenmayerSymbol('b'));
 
 			ContextInspector inspector(preContext, nullptr);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(false, result);
 		}
@@ -75,7 +75,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('e'));
 
 			ContextInspector inspector(nullptr, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(true, result);
 		}
@@ -94,7 +94,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('j'));
 
 			ContextInspector inspector(nullptr, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(false, result);
 		}
@@ -117,7 +117,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('e'));
 
 			ContextInspector inspector(preContext, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(true, result);
 		}
@@ -140,7 +140,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('e'));
 
 			ContextInspector inspector(preContext, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(false, result);
 		}
@@ -163,7 +163,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('j'));
 
 			ContextInspector inspector(preContext, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(false, result);
 		}
@@ -186,7 +186,7 @@ namespace lindenmayersystemtest {
 			postContext->Add(LindenmayerSymbol('j'));
 
 			ContextInspector inspector(preContext, postContext);
-			bool result = inspector.TestContext(2, str);
+			bool result = inspector.TestContext(str[2]);
 
 			Assert::AreEqual(false, result);
 		}

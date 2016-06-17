@@ -29,23 +29,39 @@ public:
 			delete m_postContext;
 	}
 
-	bool TestContext(unsigned int pos, LindenmayerString& string) {
-		bool lookBehindResult = TestPreContext(pos, string);
-		bool lookAheadResult = TestPostContext(pos, string);
+	bool TestContext(LindenmayerString::Iterator& it) {
+		bool lookBehindResult = TestPreContext(--it);
+		bool lookAheadResult = TestPostContext(++(++it));
 		return lookAheadResult && lookBehindResult;
 	}
 
-	bool TestPreContext(unsigned int pos, LindenmayerString& string) {
+	bool TestPreContext(LindenmayerString::Iterator& it) {
 		if (m_preContext == nullptr)
 			return true;
 
-		return string.CompareBehind(pos - 1, *m_preContext);
+		LindenmayerString::Iterator cIt = m_preContext->Last();
+
+		while (!it.AtStart() && !cIt.AtStart()) {
+			if (it != cIt)
+				return false;
+
+			--it; --cIt;
+		}
+		return true;
 	}
 
-	bool TestPostContext(unsigned int pos, LindenmayerString& string) {
+	bool TestPostContext(LindenmayerString::Iterator& it) {
 		if (m_postContext == nullptr)
 			return true;
 
-		return string.CompareAhead(pos + 1, *m_postContext);
+		LindenmayerString::Iterator cIt = m_postContext->Begin();
+
+		while (!it.AtEnd() && !cIt.AtEnd()) {
+			if (it != cIt)
+				return false;
+
+			++it; ++cIt;
+		}
+		return true;
 	}
 };
