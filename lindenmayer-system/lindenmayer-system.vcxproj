@@ -154,6 +154,7 @@
     <ClInclude Include="lindenmayer-symbol-builder.h" />
     <ClInclude Include="lindenmayer-symbol.h" />
     <ClInclude Include="production.h" />
+    <ClInclude Include="string-to-symbols-converter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
