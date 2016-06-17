@@ -39,5 +39,8 @@
     <ClInclude Include="production-result-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="string-to-symbols-converter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
