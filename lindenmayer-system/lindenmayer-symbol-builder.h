@@ -16,6 +16,9 @@ public:
 	LindenmayerSymbolBuilder(char symbol, std::initializer_list<Expression> parameterExpressions)
 		: m_symbol(symbol), m_parameterExpressions(parameterExpressions) { }
 
+	LindenmayerSymbolBuilder(char symbol, std::vector<Expression> parameterExpressions)
+		:m_symbol(symbol), m_parameterExpressions(parameterExpressions) { }
+
 	void PassParameter(const std::string& parameter, float value) {
 		for (Expression expression : m_parameterExpressions) {
 			expression.SetVariable(parameter, value);

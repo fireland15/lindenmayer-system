@@ -148,12 +148,13 @@
   <ItemGroup>
     <ClInclude Include="context-inspector-builder.h" />
     <ClInclude Include="context-inspector.h" />
+    <ClInclude Include="production-parser.h" />
     <ClInclude Include="production-result-generator.h" />
-    <ClInclude Include="lindenmayer-production.h" />
     <ClInclude Include="lindenmayer-string.h" />
     <ClInclude Include="lindenmayer-symbol-builder.h" />
     <ClInclude Include="lindenmayer-symbol.h" />
-    <ClInclude Include="production.h" />
+    <ClInclude Include="production-rule-builder.h" />
+    <ClInclude Include="production-rule.h" />
     <ClInclude Include="string-to-symbols-converter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -21,6 +21,16 @@ public:
 	ContextInspector(LindenmayerString* preContext, LindenmayerString* postContext)
 		: m_preContext(preContext), m_postContext(postContext) { }
 
+	ContextInspector(ContextInspector&& other) 
+		: m_preContext(other.m_preContext), m_postContext(other.m_postContext) {
+		other.m_preContext = nullptr;
+		other.m_postContext = nullptr;
+	}
+
+	ContextInspector(const ContextInspector& that) = delete;
+
+	ContextInspector& operator=(const ContextInspector&) = delete;
+	
 	~ContextInspector() {
 		if (m_preContext != nullptr)
 			delete m_preContext;
