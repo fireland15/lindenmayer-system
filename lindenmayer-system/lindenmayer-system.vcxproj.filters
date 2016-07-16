@@ -21,16 +21,10 @@
     <ClInclude Include="lindenmayer-string.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="production.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lindenmayer-symbol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lindenmayer-symbol-builder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lindenmayer-production.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="context-inspector-builder.h">
@@ -40,6 +34,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="string-to-symbols-converter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="production-rule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="production-rule-builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="production-parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

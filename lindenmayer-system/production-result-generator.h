@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "lindenmayer-string.h"
 #include "lindenmayer-symbol-builder.h"
 
 class ProductionResultGenerator {
@@ -11,9 +12,11 @@ private:
 public:
 	ProductionResultGenerator(std::initializer_list<LindenmayerSymbolBuilder> symbolBuilders)
 		: m_symbolBuilders(symbolBuilders) { }
+	ProductionResultGenerator(std::vector<LindenmayerSymbolBuilder> symbolBuilders)
+		: m_symbolBuilders(symbolBuilders) { }
 
-	std::vector<LindenmayerSymbol> Generate(LindenmayerSymbol symbol) {
-		std::vector<LindenmayerSymbol> symbols;
+	LindenmayerString Generate(LindenmayerSymbol symbol) {
+		LindenmayerString symbols;
 
 		for (LindenmayerSymbolBuilder builder : m_symbolBuilders) {
 			char param = 'a';
@@ -21,7 +24,7 @@ public:
 				builder.PassParameter(std::string(1, param++), value);
 			}
 
-			symbols.push_back(builder.BuildSymbol());
+			symbols.Add(builder.BuildSymbol());
 		}
 
 		return symbols;

@@ -160,7 +160,9 @@
   <ItemGroup>
     <ClCompile Include="lindenmayer-string-tests.cpp" />
     <ClCompile Include="lindenmayer-symbol-builder-tests.cpp" />
+    <ClCompile Include="production-parser-tests.cpp" />
     <ClCompile Include="production-result-builder-tests.cpp" />
+    <ClCompile Include="production-rule-tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -168,6 +170,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="context-inspector-tests.cpp" />
+    <ClCompile Include="string-to-symbols-converter-tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\expression-evaluator\expression-evaluator.vcxproj">

@@ -17,9 +17,9 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({});
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)0, result.size());
+			Assert::AreEqual((size_t)0, result.Size());
 		}
 
 		TEST_METHOD(SingleSymbolBuild) {
@@ -31,10 +31,10 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
+			Assert::AreEqual((size_t)1, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
 		}
 
 		TEST_METHOD(TwoSymbolBuild) {
@@ -47,11 +47,11 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder1, builder2 });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)2, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
-			Assert::AreEqual('t', result[1].GetSymbol());
+			Assert::AreEqual((size_t)2, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
+			Assert::AreEqual('t', (*result[1]).GetSymbol());
 		}
 
 		TEST_METHOD(ThreeSymbolBuild) {
@@ -65,12 +65,12 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder1, builder2, builder3 });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)3, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
-			Assert::AreEqual('t', result[1].GetSymbol());
-			Assert::AreEqual('g', result[2].GetSymbol());
+			Assert::AreEqual((size_t)3, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
+			Assert::AreEqual('t', (*result[1]).GetSymbol());
+			Assert::AreEqual('g', (*result[2]).GetSymbol());
 		}
 
 		TEST_METHOD(BuildSymbolWithOneParameter) {
@@ -85,12 +85,12 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
-			Assert::AreEqual((size_t)1, result[0].GetParameters().size());
-			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
+			Assert::AreEqual((size_t)1, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
+			Assert::AreEqual((size_t)1, (*result[0]).GetParameters().size());
+			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);
 		}
 
 		TEST_METHOD(BuildSymbolWithTwoParameters) {
@@ -106,13 +106,13 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
-			Assert::AreEqual((size_t)2, result[0].GetParameters().size());
-			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
-			Assert::AreEqual(9.0f, result[0].GetParameters()[1]);
+			Assert::AreEqual((size_t)1, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
+			Assert::AreEqual((size_t)2, (*result[0]).GetParameters().size());
+			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);
+			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[1]);
 		}
 
 		TEST_METHOD(BuildSymbolWithThreeParameters) {
@@ -129,14 +129,14 @@ namespace lindenmayersystemtest {
 
 			ProductionResultGenerator generator({ builder });
 
-			std::vector<LindenmayerSymbol> result = generator.Generate(symbol);
+			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((size_t)1, result.size());
-			Assert::AreEqual('v', result[0].GetSymbol());
-			Assert::AreEqual((size_t)3, result[0].GetParameters().size());
-			Assert::AreEqual(9.0f, result[0].GetParameters()[0]);
-			Assert::AreEqual(9.0f, result[0].GetParameters()[1]);
-			Assert::AreEqual(2.0f, result[0].GetParameters()[2]);
+			Assert::AreEqual((size_t)1, result.Size());
+			Assert::AreEqual('v', (*result[0]).GetSymbol());
+			Assert::AreEqual((size_t)3, (*result[0]).GetParameters().size());
+			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);
+			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[1]);
+			Assert::AreEqual(2.0f, (*result[0]).GetParameters()[2]);
 		}
 	};
 }

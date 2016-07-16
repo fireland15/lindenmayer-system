@@ -38,7 +38,7 @@ public:
 		}
 
 		bool AtEnd() {
-			return m_pos >= m_parent.m_symbols.size();
+			return (unsigned int)m_pos >= m_parent.m_symbols.size();
 		}
 
 		LindenmayerSymbol& operator*() {
