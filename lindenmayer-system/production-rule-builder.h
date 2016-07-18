@@ -17,7 +17,7 @@ public:
 
 		ParseProductionString(productionString, preContext, postContext, result, symbol);
 		
-		return Build(preContext, postContext, symbol, result);
+		return std::move(Build(preContext, postContext, symbol, result));
 	}
 
 	ProductionRule Build(std::string& preContext, std::string& postContext, char symbol, std::string& result) {

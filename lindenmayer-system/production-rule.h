@@ -20,7 +20,13 @@ public:
 	ProductionRule(char symbol, ContextInspector contextInspector, ProductionResultGenerator resultGenerator)
 		: m_symbol(symbol), m_contextInspector(std::move(contextInspector)), m_resultGenerator(resultGenerator) { }
 
-	bool CanReplace(LindenmayerString::Iterator it) {
+	ProductionRule(const ProductionRule& other) = delete;
+	ProductionRule(ProductionRule&& other) 
+		: m_contextInspector(std::move(other.m_contextInspector)), m_resultGenerator(other.m_resultGenerator), m_symbol(other.m_symbol) {
+
+	}
+
+	bool CanReplace(LindenmayerString::Iterator& it) {
 		if (m_symbol == (*it).GetSymbol())
 			return m_contextInspector.TestContext(it);
 
