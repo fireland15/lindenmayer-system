@@ -61,6 +61,44 @@ namespace lindenmayersystemtest {
 			Assert::AreEqual(false, result);
 		}
 
+		TEST_METHOD(PreContextBeforeBegining) {
+			LindenmayerString str;
+			str.Add(LindenmayerSymbol('a'));
+			str.Add(LindenmayerSymbol('b'));
+			str.Add(LindenmayerSymbol('c'));
+			str.Add(LindenmayerSymbol('d'));
+			str.Add(LindenmayerSymbol('e'));
+			str.Add(LindenmayerSymbol('f'));
+
+			LindenmayerString* preContext = new LindenmayerString;
+			preContext->Add(LindenmayerSymbol('b'));
+			preContext->Add(LindenmayerSymbol('a'));
+
+			ContextInspector inspector(preContext, nullptr);
+			bool result = inspector.TestContext(str[1]);
+
+			Assert::AreEqual(false, result);
+		}
+
+		TEST_METHOD(PreContextAtBegining) {
+			LindenmayerString str;
+			str.Add(LindenmayerSymbol('a'));
+			str.Add(LindenmayerSymbol('b'));
+			str.Add(LindenmayerSymbol('c'));
+			str.Add(LindenmayerSymbol('d'));
+			str.Add(LindenmayerSymbol('e'));
+			str.Add(LindenmayerSymbol('f'));
+
+			LindenmayerString* preContext = new LindenmayerString;
+			preContext->Add(LindenmayerSymbol('b'));
+			preContext->Add(LindenmayerSymbol('b'));
+
+			ContextInspector inspector(preContext, nullptr);
+			bool result = inspector.TestContext(str[0]);
+
+			Assert::AreEqual(false, result);
+		}
+
 		TEST_METHOD(PostContextMatchOnly) {
 			LindenmayerString str;
 			str.Add(LindenmayerSymbol('a'));
@@ -95,6 +133,44 @@ namespace lindenmayersystemtest {
 
 			ContextInspector inspector(nullptr, postContext);
 			bool result = inspector.TestContext(str[2]);
+
+			Assert::AreEqual(false, result);
+		}
+
+		TEST_METHOD(PostContextBeyondEndOfString) {
+			LindenmayerString str;
+			str.Add(LindenmayerSymbol('a'));
+			str.Add(LindenmayerSymbol('b'));
+			str.Add(LindenmayerSymbol('c'));
+			str.Add(LindenmayerSymbol('d'));
+			str.Add(LindenmayerSymbol('e'));
+			str.Add(LindenmayerSymbol('f'));
+
+			LindenmayerString* postContext = new LindenmayerString;
+			postContext->Add(LindenmayerSymbol('f'));
+			postContext->Add(LindenmayerSymbol('g'));
+
+			ContextInspector inspector(nullptr, postContext);
+			bool result = inspector.TestContext(str[4]);
+
+			Assert::AreEqual(false, result);
+		}
+
+		TEST_METHOD(PostContextAtEndOfString) {
+			LindenmayerString str;
+			str.Add(LindenmayerSymbol('a'));
+			str.Add(LindenmayerSymbol('b'));
+			str.Add(LindenmayerSymbol('c'));
+			str.Add(LindenmayerSymbol('d'));
+			str.Add(LindenmayerSymbol('e'));
+			str.Add(LindenmayerSymbol('f'));
+
+			LindenmayerString* postContext = new LindenmayerString;
+			postContext->Add(LindenmayerSymbol('g'));
+			postContext->Add(LindenmayerSymbol('h'));
+
+			ContextInspector inspector(nullptr, postContext);
+			bool result = inspector.TestContext(str[5]);
 
 			Assert::AreEqual(false, result);
 		}
