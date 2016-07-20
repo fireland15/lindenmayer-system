@@ -16,10 +16,6 @@ public:
 
 	LindenmayerString(std::initializer_list<LindenmayerSymbol> symbols)
 		: m_symbols(symbols) { }
-	
-	void Add(LindenmayerSymbol symbol) {
-		m_symbols.push_back(symbol);
-	}
 
 	class Iterator {
 	private:
@@ -45,6 +41,10 @@ public:
 			return m_parent.m_symbols[m_pos];
 		}
 
+		LindenmayerSymbol* operator->() {
+			return &(m_parent.m_symbols[m_pos]);
+		}
+
 		Iterator operator++() {
 			++m_pos;
 			return *this;
@@ -63,6 +63,20 @@ public:
 			return this->operator*().GetSymbol() != other.operator*().GetSymbol();
 		}
 	};
+	
+	void Add(LindenmayerSymbol symbol) {
+		m_symbols.push_back(symbol);
+	}
+
+	void Add(LindenmayerString::Iterator& it) {
+		m_symbols.push_back(*it);
+	}
+
+	void Add(LindenmayerString& str) {
+		for (unsigned int i = 0; i < str.Size(); i++) {
+			Add(str[i]);
+		}
+	}
 
 	Iterator operator[](unsigned int index) {
 		return Iterator(*this, index);
@@ -72,6 +86,10 @@ public:
 		return m_symbols.size();
 	}
 
+	void Clear() {
+		m_symbols.clear();
+	}
+
 	Iterator Begin() {
 		return Iterator(*this, 0);
 	}
@@ -79,4 +97,14 @@ public:
 	Iterator Last() {
 		return Iterator(*this, m_symbols.size() - 1);
 	}
+
+	void swap(LindenmayerString& other) {
+		std::swap(m_symbols, other.m_symbols);
+	}
 };
+
+namespace {
+	void swap(LindenmayerString& lhs, LindenmayerString& rhs) {
+		lhs.swap(rhs);
+	}
+}

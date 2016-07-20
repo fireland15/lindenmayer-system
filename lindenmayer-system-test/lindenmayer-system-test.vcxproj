@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="lindenmayer-string-tests.cpp" />
     <ClCompile Include="lindenmayer-symbol-builder-tests.cpp" />
+    <ClCompile Include="lindenmayer-system-tests.cpp" />
     <ClCompile Include="production-parser-tests.cpp" />
     <ClCompile Include="production-result-builder-tests.cpp" />
     <ClCompile Include="production-rule-tests.cpp" />
