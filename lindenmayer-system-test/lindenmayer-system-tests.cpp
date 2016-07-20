@@ -20,7 +20,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(1);
 
-			Assert::AreEqual((unsigned int)2, result.Size());
+			Assert::AreEqual((size_t)2, result.Size());
 			Assert::AreEqual('A', (*result[0]).GetSymbol());
 			Assert::AreEqual('B', (*result[1]).GetSymbol());
 		}
@@ -37,7 +37,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(1);
 
-			Assert::AreEqual((unsigned int)2, result.Size());
+			Assert::AreEqual((size_t)2, result.Size());
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual('A', result[1]->GetSymbol());
 		}
@@ -55,7 +55,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(2);
 
-			Assert::AreEqual((unsigned int)4, result.Size());
+			Assert::AreEqual((size_t)4, result.Size());
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual('A', result[1]->GetSymbol());
 			Assert::AreEqual('A', result[2]->GetSymbol());
@@ -77,7 +77,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(2);
 
-			Assert::AreEqual((unsigned int)4, result.Size());
+			Assert::AreEqual((size_t)4, result.Size());
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual('B', result[1]->GetSymbol());
 			Assert::AreEqual('B', result[2]->GetSymbol());
@@ -98,9 +98,26 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(1);
 
-			Assert::AreEqual((unsigned int)2, result.Size());
+			Assert::AreEqual((size_t)2, result.Size());
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual('B', result[1]->GetSymbol());
+		}
+
+		TEST_METHOD(Test1) {
+			LindenmayerString axiom;
+			axiom.Add(LindenmayerSymbol('A', { 2.0f }));
+
+			ProductionRuleBuilder ruleBuilder;
+			std::vector<ProductionRule> rules;
+			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A(2 * a)"))));
+
+			LindenmayerSystem system(axiom, std::move(rules));
+
+			LindenmayerString result = system.Run(1);
+
+			Assert::AreEqual((size_t)1, result.Size());
+			Assert::AreEqual('A', result[0]->GetSymbol());
+			Assert::AreEqual(4.0f, result[0]->GetParameters()[0]);
 		}
 	};
 }

@@ -82,7 +82,7 @@ public:
 		return Iterator(*this, index);
 	}
 
-	unsigned int Size() const {
+	size_t Size() const {
 		return m_symbols.size();
 	}
 
@@ -95,7 +95,7 @@ public:
 	}
 
 	Iterator Last() {
-		return Iterator(*this, m_symbols.size() - 1);
+		return Iterator(*this, (int)m_symbols.size() - 1);
 	}
 
 	void swap(LindenmayerString& other) {

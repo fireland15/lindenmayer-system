@@ -19,7 +19,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)0, result.Size());
+			Assert::AreEqual((size_t)0, result.Size());
 		}
 
 		TEST_METHOD(SingleSymbolBuild) {
@@ -33,7 +33,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((size_t)1, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 		}
 
@@ -49,7 +49,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)2, result.Size());
+			Assert::AreEqual((size_t)2, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 			Assert::AreEqual('t', (*result[1]).GetSymbol());
 		}
@@ -67,7 +67,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)3, result.Size());
+			Assert::AreEqual((size_t)3, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 			Assert::AreEqual('t', (*result[1]).GetSymbol());
 			Assert::AreEqual('g', (*result[2]).GetSymbol());
@@ -87,7 +87,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((size_t)1, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 			Assert::AreEqual((size_t)1, (*result[0]).GetParameters().size());
 			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);
@@ -108,7 +108,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((size_t)1, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 			Assert::AreEqual((size_t)2, (*result[0]).GetParameters().size());
 			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);
@@ -131,7 +131,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = generator.Generate(symbol);
 
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((size_t)1, result.Size());
 			Assert::AreEqual('v', (*result[0]).GetSymbol());
 			Assert::AreEqual((size_t)3, (*result[0]).GetParameters().size());
 			Assert::AreEqual(9.0f, (*result[0]).GetParameters()[0]);

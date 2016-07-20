@@ -18,7 +18,7 @@ namespace lindenmayersystemtest {
 
 			Assert::IsTrue(rule.CanReplace(lStr[1]));
 			LindenmayerString result = rule.Produce(*(lStr[1]));
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((size_t)1, result.Size());
 			Assert::AreEqual('A', (*result[0]).GetSymbol());
 		}
 

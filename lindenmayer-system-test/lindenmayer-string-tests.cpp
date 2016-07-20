@@ -21,8 +21,8 @@ namespace lindenmayersystemtest {
 
 			std::swap(str1, str2);
 
-			Assert::AreEqual((unsigned int)1, str1.Size());
-			Assert::AreEqual((unsigned int)4, str2.Size());
+			Assert::AreEqual((size_t)1, str1.Size());
+			Assert::AreEqual((size_t)4, str2.Size());
 		}
 	};
 }

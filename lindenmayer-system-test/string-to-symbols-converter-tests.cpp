@@ -13,7 +13,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString* result = StrToLstrConverter::ContextConvert(str);
 
-			Assert::AreEqual((unsigned int) 3, result->Size());
+			Assert::AreEqual((size_t) 3, result->Size());
 			Assert::AreEqual('A', (*(*result)[0]).GetSymbol());
 			Assert::AreEqual('B', (*(*result)[1]).GetSymbol());
 			Assert::AreEqual('C', (*(*result)[2]).GetSymbol());
@@ -24,7 +24,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString* result = StrToLstrConverter::ContextConvert(str);
 
-			Assert::AreEqual((unsigned int)3, result->Size());
+			Assert::AreEqual((size_t)3, result->Size());
 			Assert::AreEqual('A', (*(*result)[0]).GetSymbol());
 			Assert::AreEqual('B', (*(*result)[1]).GetSymbol());
 			Assert::AreEqual('C', (*(*result)[2]).GetSymbol());
@@ -35,7 +35,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString* result = StrToLstrConverter::ContextConvert(str);
 
-			Assert::AreEqual((unsigned int)3, result->Size());
+			Assert::AreEqual((size_t)3, result->Size());
 			Assert::AreEqual('A', (*(*result)[0]).GetSymbol());
 			Assert::AreEqual('B', (*(*result)[1]).GetSymbol());
 			Assert::AreEqual('C', (*(*result)[2]).GetSymbol());
