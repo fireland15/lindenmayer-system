@@ -41,6 +41,10 @@ bool ContextInspector::TestPreContext(LindenmayerString::Iterator& it) {
 
 		--it; --cIt;
 	}
+
+	if (it.AtStart() && !cIt.AtStart())
+		return false;
+
 	return true;
 }
 
@@ -56,5 +60,9 @@ bool ContextInspector::TestPostContext(LindenmayerString::Iterator& it) {
 
 		++it; ++cIt;
 	}
+
+	if (it.AtEnd() && !cIt.AtEnd())
+		return false;
+
 	return true;
 }

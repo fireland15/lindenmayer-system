@@ -98,7 +98,7 @@ namespace lindenmayersystemtest {
 
 			LindenmayerString result = system.Run(1);
 
-			Assert::AreEqual((unsigned int)1, result.Size());
+			Assert::AreEqual((unsigned int)2, result.Size());
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual('B', result[1]->GetSymbol());
 		}
