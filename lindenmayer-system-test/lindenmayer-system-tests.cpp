@@ -119,5 +119,27 @@ namespace lindenmayersystemtest {
 			Assert::AreEqual('A', result[0]->GetSymbol());
 			Assert::AreEqual(4.0f, result[0]->GetParameters()[0]);
 		}
+
+		TEST_METHOD(Test2) {
+			LindenmayerString axiom;
+			axiom.Add(LindenmayerSymbol('A', { 2.0f }));
+
+			ProductionRuleBuilder ruleBuilder;
+			std::vector<ProductionRule> rules;
+			rules.push_back(std::move(ruleBuilder.Build(std::string("A"), std::string(""), 'A', std::string("A(0)"))));
+			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A(2 * a)-A(2*a)"))));
+
+			LindenmayerSystem system(axiom, std::move(rules));
+
+			LindenmayerString result = system.Run(2);
+
+			Assert::AreEqual((size_t)3, result.Size());
+			Assert::AreEqual('A', result[0]->GetSymbol());
+			Assert::AreEqual(8.0f, result[0]->GetParameters()[0]);
+			Assert::AreEqual('A', result[1]->GetSymbol());
+			Assert::AreEqual(8.0f, result[1]->GetParameters()[0]);
+			Assert::AreEqual('A', result[2]->GetSymbol());
+			Assert::AreEqual(0.0f, result[2]->GetParameters()[0]);
+		}
 	};
 }
