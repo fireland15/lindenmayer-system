@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "../lindenmayer-system/lindenmayer-system.h"
-#include "../lindenmayer-system/production-rule-builder.h"
-
 #include <vector>
+
+#include "../lindenmayer-system/lindenmayer-system.h"
+#include "../lindenmayer-system/factories.h"
+
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -29,9 +30,8 @@ namespace lindenmayersystemtest {
 			LindenmayerString axiom;
 			axiom.Add(LindenmayerSymbol('A', {}));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A()-A()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A()-A()"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 
@@ -47,9 +47,8 @@ namespace lindenmayersystemtest {
 			LindenmayerString axiom;
 			axiom.Add(LindenmayerSymbol('A', {}));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A()-A()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A()-A()"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 
@@ -68,10 +67,9 @@ namespace lindenmayersystemtest {
 			axiom.Add(LindenmayerSymbol('A'));
 			axiom.Add(LindenmayerSymbol('B'));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A()-B()"))));
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'B', std::string("B()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A()-B()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("B : B()"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 
@@ -88,11 +86,10 @@ namespace lindenmayersystemtest {
 			LindenmayerString axiom;
 			axiom.Add(LindenmayerSymbol('A'));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string("B()"), 'A', std::string("C()"))));
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A()-B()"))));
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'B', std::string("B()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A > B: C()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A()-B()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : B()"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 
@@ -107,9 +104,8 @@ namespace lindenmayersystemtest {
 			LindenmayerString axiom;
 			axiom.Add(LindenmayerSymbol('A', { 2.0f }));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A(2 * a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A(2 * a)"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 
@@ -124,10 +120,9 @@ namespace lindenmayersystemtest {
 			LindenmayerString axiom;
 			axiom.Add(LindenmayerSymbol('A', { 2.0f }));
 
-			ProductionRuleBuilder ruleBuilder;
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(ruleBuilder.Build(std::string("A"), std::string(""), 'A', std::string("A(0)"))));
-			rules.push_back(std::move(ruleBuilder.Build(std::string(""), std::string(""), 'A', std::string("A(2 * a)-A(2*a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A < A : A(0)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("A : A(2 * a)-A(2 * a)"))));
 
 			LindenmayerSystem system(axiom, std::move(rules));
 

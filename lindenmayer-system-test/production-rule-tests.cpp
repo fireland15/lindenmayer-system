@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "../lindenmayer-system/production-rule-builder.h"
+#include "../lindenmayer-system/factories.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -9,7 +9,7 @@ namespace lindenmayersystemtest {
 	TEST_CLASS(ProductionRuleBuilderTests) {
 	public:
 		TEST_METHOD(NoContext) {
-			ProductionRule rule = ProductionRuleBuilder().Build(std::string(""), std::string(""), 'A', std::string("A()"));
+			ProductionRule rule = CreateProductionRule(std::string("A : A()"));
 
 			LindenmayerString lStr;
 			lStr.Add(LindenmayerSymbol('C'));
@@ -23,7 +23,7 @@ namespace lindenmayersystemtest {
 		}
 
 		TEST_METHOD(PreContext) {
-			ProductionRule rule = ProductionRuleBuilder().Build(std::string("C"), std::string(""), 'A', std::string("A()"));
+			ProductionRule rule = CreateProductionRule(std::string("C < A : A()"));
 
 			LindenmayerString lStr;
 			lStr.Add(LindenmayerSymbol('C'));
@@ -34,7 +34,7 @@ namespace lindenmayersystemtest {
 		}
 
 		TEST_METHOD(PostContext) {
-			ProductionRule rule = ProductionRuleBuilder().Build(std::string(""), std::string("D"), 'A', std::string("A()"));
+			ProductionRule rule = CreateProductionRule(std::string("A > D : A()"));
 
 			LindenmayerString lStr;
 			lStr.Add(LindenmayerSymbol('C'));
@@ -45,7 +45,7 @@ namespace lindenmayersystemtest {
 		}
 
 		TEST_METHOD(BothContext) {
-			ProductionRule rule = ProductionRuleBuilder().Build(std::string("C"), std::string("D"), 'A', std::string("A()"));
+			ProductionRule rule = CreateProductionRule(std::string("C < A > D : A()"));
 
 			LindenmayerString lStr;
 			lStr.Add(LindenmayerSymbol('C'));
