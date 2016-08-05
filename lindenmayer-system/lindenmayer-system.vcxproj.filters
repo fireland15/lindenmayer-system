@@ -27,19 +27,10 @@
     <ClInclude Include="lindenmayer-symbol-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="context-inspector-builder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="production-result-generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="string-to-symbols-converter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="production-rule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="production-rule-builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="production-parser.h">
@@ -48,9 +39,39 @@
     <ClInclude Include="lindenmayer-system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="factories.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="production-rule-create-desc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="context-inspector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lindenmayer-string.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lindenmayer-symbol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="production-rule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lindenmayer-symbol-builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lindenmayer-system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="production-result-generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factories.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="production-parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

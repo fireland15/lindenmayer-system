@@ -14,20 +14,12 @@ class ContextInspector {
 
 public:
 	ContextInspector();
-
 	ContextInspector(LindenmayerString* preContext, LindenmayerString* postContext);
-
 	ContextInspector(ContextInspector&& other);
-
 	ContextInspector(const ContextInspector& that) = delete;
-
-	ContextInspector& operator=(const ContextInspector&) = delete;
-	
+	ContextInspector& operator=(const ContextInspector&) = delete;	
 	~ContextInspector();
-
 	bool TestContext(LindenmayerString::Iterator& it);
-
 	bool TestPreContext(LindenmayerString::Iterator& it);
-
 	bool TestPostContext(LindenmayerString::Iterator& it);
 };
