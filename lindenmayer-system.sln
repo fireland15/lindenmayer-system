@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lindenmayer-system-test", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expression-evaluator", "expression-evaluator\expression-evaluator.vcxproj", "{65BACFFE-B5FA-4372-99BD-18DD9C46F901}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "geometry-generator", "geometry-generator\geometry-generator.vcxproj", "{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{65BACFFE-B5FA-4372-99BD-18DD9C46F901}.Release|x64.Build.0 = Release|x64
 		{65BACFFE-B5FA-4372-99BD-18DD9C46F901}.Release|x86.ActiveCfg = Release|Win32
 		{65BACFFE-B5FA-4372-99BD-18DD9C46F901}.Release|x86.Build.0 = Release|Win32
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Debug|x64.ActiveCfg = Debug|x64
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Debug|x64.Build.0 = Debug|x64
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Debug|x86.ActiveCfg = Debug|Win32
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Debug|x86.Build.0 = Debug|Win32
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x64.ActiveCfg = Release|x64
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x64.Build.0 = Release|x64
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x86.ActiveCfg = Release|Win32
+		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
