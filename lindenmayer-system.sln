@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "expression-evaluator", "exp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "geometry-generator", "geometry-generator\geometry-generator.vcxproj", "{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "geometry-generator-test", "geometry-generator-test\geometry-generator-test.vcxproj", "{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x64.Build.0 = Release|x64
 		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x86.ActiveCfg = Release|Win32
 		{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}.Release|x86.Build.0 = Release|Win32
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Debug|x64.ActiveCfg = Debug|x64
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Debug|x64.Build.0 = Debug|x64
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Debug|x86.ActiveCfg = Debug|Win32
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Debug|x86.Build.0 = Debug|Win32
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Release|x64.ActiveCfg = Release|x64
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Release|x64.Build.0 = Release|x64
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Release|x86.ActiveCfg = Release|Win32
+		{90B11EC1-509B-47DD-AFB7-FD4F67AD2FCB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
