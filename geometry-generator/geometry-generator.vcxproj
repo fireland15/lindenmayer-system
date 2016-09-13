@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseRecorder.h" />
+    <ClInclude Include="BaseTurtle.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphRecordInterpreter.h" />
+    <ClInclude Include="ListRecorder.h" />
+    <ClInclude Include="ListRecordInterpreter.h" />
+    <ClInclude Include="RecordedTurtle.h" />
+    <ClInclude Include="TurtleCommand.h" />
+    <ClInclude Include="TurtleCommandFactory.h" />
+    <ClInclude Include="BaseRecordInterpreter.h" />
+    <ClInclude Include="ITurtleCommandSet.h" />
+    <ClInclude Include="TurtleState.h" />
+    <ClInclude Include="VertexTurtleCommandSet.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
