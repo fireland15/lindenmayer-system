@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="BaseRecorder.h" />
     <ClInclude Include="BaseTurtle.h" />
+    <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphRecordInterpreter.h" />
     <ClInclude Include="ListRecorder.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="TurtleCommandFactory.h" />
     <ClInclude Include="BaseRecordInterpreter.h" />
     <ClInclude Include="ITurtleCommandSet.h" />
+    <ClInclude Include="TurtleFactory.h" />
     <ClInclude Include="TurtleState.h" />
     <ClInclude Include="VertexTurtleCommandSet.h" />
   </ItemGroup>

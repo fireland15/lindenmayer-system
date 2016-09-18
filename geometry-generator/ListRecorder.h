@@ -3,18 +3,18 @@
 #include <vector>
 
 #include "BaseRecorder.h"
+#include "TurtleState.h"
 
-template<typename TState>
-class ListRecorder : public BaseRecorder<TState> {
+class ListRecorder : public BaseRecorder {
 private:
-	std::vector<TState> m_states;
+	std::vector<BaseTurtleState> m_states;
 
 public:
-	virtual void Record(TState state) {
+	virtual void Record(BaseTurtleState state) {
 		m_states.push_back(state);
 	}
 
-	const std::vector<TState>& GetStates() {
+	const std::vector<BaseTurtleState>& GetStates() {
 		return m_states;
 	}
 };

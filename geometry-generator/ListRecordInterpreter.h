@@ -3,10 +3,10 @@
 #include <vector>
 #include "../glm/glm.hpp"
 
+#include "TurtleState.h"
 #include "BaseRecordInterpreter.h"
 
-template <typename TState>
-class ListRecordInterpreter : public BaseRecordInterpreter<std::vector<TState>> {
+class ListRecordInterpreter : public BaseRecordInterpreter<std::vector<BaseTurtleState>> {
 public:
 	virtual std::vector<glm::vec3> Interpret(std::vector<glm::vec3> container) {
 		return std::vector<glm::vec3>();

@@ -2,19 +2,19 @@
 
 #include "BaseTurtle.h"
 #include "BaseRecorder.h"
+#include "TurtleState.h"
 
-template <typename TState>
-class RecordedTurtle : public BaseTurtle<TState> {
+class RecordedTurtle : public BaseTurtle {
 private:
-	BaseRecorder<TState>& m_stateRecorder;
+	BaseRecorder& m_stateRecorder;
 
 public:
-	RecordedTurtle(TState initialState, BaseRecorder<TState>& recorder)
+	RecordedTurtle(BaseTurtleState initialState, BaseRecorder& recorder)
 		: m_stateRecorder(recorder), BaseTurtle(initialState) {
 
 	}
 
-	virtual void ExecuteCommand(std::function<void(TState&)> func) {
+	virtual void ExecuteCommand(std::function<void(BaseTurtleState&)> func) {
 		func(GetStateReference());
 		PostExecute();
 	}

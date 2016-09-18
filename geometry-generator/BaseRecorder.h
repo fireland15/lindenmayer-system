@@ -1,9 +1,10 @@
 #pragma once
 
-template <typename TState>
+#include "TurtleState.h"
+
 class BaseRecorder {
 private:
 
 public:
-	virtual void Record(TState state) = 0;
+	virtual void Record(BaseTurtleState state) = 0;
 };

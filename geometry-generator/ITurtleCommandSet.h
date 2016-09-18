@@ -6,17 +6,16 @@
 
 typedef std::function<void(BaseTurtleState&)> BaseStateCmd;
 
-template <typename TState>
 class ITurtleCommandSet {
 public:
-	virtual std::function<void(TState&)> GetForwardCommand(float length, bool draw = true) = 0;
-	virtual std::function<void(TState&)> GetYawLeftCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetYawRightCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetPitchDownCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetPitchUpCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetRollLeftCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetRollRightCommand(float angle) = 0;
-	virtual std::function<void(TState&)> GetTurnAroundCommand() = 0;
-	virtual std::function<void(TState&)> GetPushCommand() = 0;
-	virtual std::function<void(TState&)> GetPopCommand() = 0;
+	virtual BaseStateCmd GetForwardCommand(float length, bool draw = true) = 0;
+	virtual BaseStateCmd GetYawLeftCommand(float angle) = 0;
+	virtual BaseStateCmd GetYawRightCommand(float angle) = 0;
+	virtual BaseStateCmd GetPitchDownCommand(float angle) = 0;
+	virtual BaseStateCmd GetPitchUpCommand(float angle) = 0;
+	virtual BaseStateCmd GetRollLeftCommand(float angle) = 0;
+	virtual BaseStateCmd GetRollRightCommand(float angle) = 0;
+	virtual BaseStateCmd GetTurnAroundCommand() = 0;
+	virtual BaseStateCmd GetPushCommand() = 0;
+	virtual BaseStateCmd GetPopCommand() = 0;
 };

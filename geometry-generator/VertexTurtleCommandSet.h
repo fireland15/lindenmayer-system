@@ -6,7 +6,7 @@
 #include "ITurtleCommandSet.h"
 #include "TurtleState.h"
 
-class VertexTurtleCommandSet : public ITurtleCommandSet<BaseTurtleState> {
+class VertexTurtleCommandSet : public ITurtleCommandSet {
 public:
 	virtual BaseStateCmd GetForwardCommand(float length, bool draw = true) {
 		return [length](BaseTurtleState& state) {

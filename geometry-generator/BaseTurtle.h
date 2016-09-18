@@ -2,31 +2,30 @@
 
 #include <functional>
 
-template <typename TState>
 class BaseTurtle {
 private:
-	TState m_state;
+	BaseTurtleState m_state;
 
 public:
-	BaseTurtle(TState state)
+	BaseTurtle(BaseTurtleState state)
 		: m_state(state) {
 
 	}
 
-	TState GetState() {
+	BaseTurtleState GetState() {
 		return m_state;
 	}
 
-	void SetState(TState state) {
+	void SetState(BaseTurtleState state) {
 		m_state = state;
 	}
 
-	virtual void ExecuteCommand(std::function<void(TState&)> func) {
+	virtual void ExecuteCommand(std::function<void(BaseTurtleState&)> func) {
 		func(m_state);
 	}
 
 protected:
-	TState& GetStateReference() {
+	BaseTurtleState& GetStateReference() {
 		return m_state;
 	}
 };
