@@ -1,7 +1,7 @@
 #pragma once
 
-#include "BaseTurtle.h"
-#include "RecordedTurtle.h"
+#include <memory>
+
 #include "ListRecorder.h"
 #include "TurtleState.h"
 
@@ -14,19 +14,8 @@ class TurtleFactory {
 private:
 
 public:
-	static BaseTurtle MakeTurtle(TurtleType type) {
-		switch (type) {
-		case TurtleType::Base: {
-			return BaseTurtle(MakeInitState());
-		}
-		break;
-		case TurtleType::ListRecorded: {
-			return RecordedTurtle(MakeInitState(), ListRecorder());
-		}
-		break;
-		default:
-			break;
-		}
+	static std::unique_ptr<Turtle> MakeTurtle(std::shared_ptr<BaseRecorder> pRecorder) {
+		return std::unique_ptr<Turtle>(new Turtle(MakeInitState(), pRecorder));
 	}
 
 private:

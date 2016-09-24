@@ -5,11 +5,8 @@
 #include <vector>
 
 #include "../lindenmayer-system/lindenmayer-string.h"
-#include "ITurtleCommandSet.h"
-#include "TurtleCommandFactory.h"
-#include "BaseTurtle.h"
-#include "TurtleFactory.h"
-#include "VertexTurtleCommandSet.h"
+
+#include "LStringInterpreter.h"
 
 typedef OpenMesh::PolyMesh_ArrayKernelT<> Mesh;
 
@@ -20,31 +17,24 @@ enum GeometryType {
 
 class GeometryGenerator {
 private:
-	TurtleCommandFactory& m_commandFactory;
-	BaseTurtle m_turtle;
+	LStringInterpreter m_interpreter;
 
 public:
-	GeometryGenerator(TurtleCommandFactory&& commandFactory, BaseTurtle&& turtle)
-		: m_commandFactory(commandFactory), m_turtle(turtle) { }
+	GeometryGenerator() {
 
-	Mesh Generate(LindenmayerString& string) {
-		for (int i = 0; i < string.Size; i++) {
-
-		}
 	}
 
-	static GeometryGenerator MakeGeometryGenerator(GeometryType type) {
+	std::unique_ptr<Mesh> Generate(const LindenmayerString& lString, GeometryType type) {
+		//Todo: Pass the expected geometry type into the interpreter so it produces the desired results.
 		switch (type) {
-		case GeometryType::Points: 
-		{
-			return GeometryGenerator(TurtleCommandFactory(VertexTurtleCommandSet()), TurtleFactory::MakeTurtle(TurtleType::ListRecorded));
-		}
-		break;
+		case GeometryType::Points:
+			return m_interpreter.Interpret(lString);
+			break;
 		case GeometryType::Lines:
-		{
-
-		}
-		break;
+			return m_interpreter.Interpret(lString);
+			break;
+		default:
+			break;
 		}
 	}
 };
