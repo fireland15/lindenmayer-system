@@ -7,14 +7,14 @@
 
 class ListRecorder : public BaseRecorder {
 private:
-	std::vector<BaseTurtleState> m_states;
+	std::vector<TurtleState> m_states;
 
 public:
-	virtual void Record(BaseTurtleState state) {
+	virtual void Record(TurtleState state) {
 		m_states.push_back(state);
 	}
 
-	const std::vector<BaseTurtleState>& GetStates() {
+	const std::vector<TurtleState>& GetStates() {
 		return m_states;
 	}
 };

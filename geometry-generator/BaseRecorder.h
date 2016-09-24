@@ -6,5 +6,5 @@ class BaseRecorder {
 private:
 
 public:
-	virtual void Record(BaseTurtleState state) = 0;
+	virtual void Record(TurtleState state) = 0;
 };

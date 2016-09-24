@@ -10,8 +10,8 @@ namespace geometrygeneratortest{
 	TEST_CLASS(VertexTurtleCommandSetTests) {
 	public:
 		TEST_METHOD(ForwardTest) {
-			BaseTurtleState state = BaseTurtleState();
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			TurtleState state = TurtleState();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			auto cmd = pCmdSet->GetForwardCommand(1.0f);
 
 			cmd(state);
@@ -22,10 +22,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(YawLeftTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 0.0f, 1.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetYawLeftCommand(90.0f);
 
 			cmd(state);
@@ -40,10 +40,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(YawRightTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 0.0f, 1.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetYawRightCommand(90.0f);
 
 			cmd(state);
@@ -58,10 +58,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(PitchDownTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 0.0f, 1.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetPitchDownCommand(90.0f);
 
 			cmd(state);
@@ -76,10 +76,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(PitchUpTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 0.0f, 1.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetPitchUpCommand(90.0f);
 
 			cmd(state);
@@ -94,10 +94,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(RollLeftTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 1.0f, 0.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetRollLeftCommand(90.0f);
 
 			cmd(state);
@@ -112,10 +112,10 @@ namespace geometrygeneratortest{
 		}
 
 		TEST_METHOD(RollRightTest) {
-			BaseTurtleState state = BaseTurtleState();
+			TurtleState state = TurtleState();
 			state.position = glm::vec3(0.0f, 0.0f, 0.0f);
 			state.orientation = glm::vec3(0.0f, 1.0f, 0.0f);
-			ITurtleCommandSet<BaseTurtleState>* pCmdSet = new VertexTurtleCommandSet();
+			ITurtleCommandSet* pCmdSet = new VertexTurtleCommandSet();
 			BaseStateCmd cmd = pCmdSet->GetRollRightCommand(90.0f);
 
 			cmd(state);

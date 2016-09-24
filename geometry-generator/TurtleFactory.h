@@ -14,7 +14,7 @@ class TurtleFactory {
 private:
 
 public:
-	BaseTurtle MakeTurtle(TurtleType type) {
+	static BaseTurtle MakeTurtle(TurtleType type) {
 		switch (type) {
 		case TurtleType::Base: {
 			return BaseTurtle(MakeInitState());
@@ -30,8 +30,8 @@ public:
 	}
 
 private:
-	BaseTurtleState MakeInitState() {
-		BaseTurtleState initState;
+	static TurtleState MakeInitState() {
+		TurtleState initState;
 		initState.up = glm::vec3(0.0f, 1.0f, 0.0f);
 		initState.position = glm::vec3(0.0f, 0.0f, 0.0f);
 		initState.orientation = glm::vec3(0.0f, 1.0f, 0.0f);

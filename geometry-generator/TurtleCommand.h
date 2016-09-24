@@ -3,13 +3,14 @@
 #include <functional>
 
 #include "BaseTurtle.h"
+#include "TurtleState.h"
 
 class TurtleCommand {
 private:
-	std::function<void(BaseTurtleState&)> m_internalCommand;
+	std::function<void(TurtleState&)> m_internalCommand;
 
 public:
-	TurtleCommand(std::function<void(BaseTurtleState&)> command) {
+	TurtleCommand(std::function<void(TurtleState&)> command) {
 		m_internalCommand = command;
 	}
 

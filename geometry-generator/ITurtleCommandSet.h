@@ -4,7 +4,7 @@
 
 #include "TurtleState.h"
 
-typedef std::function<void(BaseTurtleState&)> BaseStateCmd;
+typedef std::function<void(TurtleState&)> BaseStateCmd;
 
 class ITurtleCommandSet {
 public:

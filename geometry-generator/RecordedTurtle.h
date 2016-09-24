@@ -9,12 +9,12 @@ private:
 	BaseRecorder& m_stateRecorder;
 
 public:
-	RecordedTurtle(BaseTurtleState initialState, BaseRecorder& recorder)
+	RecordedTurtle(TurtleState initialState, BaseRecorder& recorder)
 		: m_stateRecorder(recorder), BaseTurtle(initialState) {
 
 	}
 
-	virtual void ExecuteCommand(std::function<void(BaseTurtleState&)> func) {
+	virtual void ExecuteCommand(std::function<void(TurtleState&)> func) {
 		func(GetStateReference());
 		PostExecute();
 	}

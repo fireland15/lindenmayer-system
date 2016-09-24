@@ -6,7 +6,7 @@
 #include "TurtleState.h"
 #include "BaseRecordInterpreter.h"
 
-class ListRecordInterpreter : public BaseRecordInterpreter<std::vector<BaseTurtleState>> {
+class ListRecordInterpreter : public BaseRecordInterpreter<std::vector<TurtleState>> {
 public:
 	virtual std::vector<glm::vec3> Interpret(std::vector<glm::vec3> container) {
 		return std::vector<glm::vec3>();
