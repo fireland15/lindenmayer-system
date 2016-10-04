@@ -38,10 +38,10 @@ private:
 	}
 
 	std::unique_ptr<Mesh> InterpretPointRecorderWithTriangles(PointRecorder* pointRecorder) {
-		float scale = 0.5f;
+		float scale = 1.0f;
 		glm::vec3 a(0.0f, -0.1f, 0.0f);
-		glm::vec3 b(0.1f, 0.05f, 0.0f);
-		glm::vec3 c(-0.1f, 0.05f, 0.0f);
+		glm::vec3 b(0.0f, 0.05f, 0.1f);
+		glm::vec3 c(0.0f, 0.05f, -0.1f);
 
 		Mesh* mesh = new Mesh;
 
