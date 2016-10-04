@@ -13,15 +13,21 @@ private:
 public:
 	Turtle(TurtleState initialState, std::shared_ptr<BaseRecorder> recorder)
 		: m_state(initialState), mp_stateRecorder(recorder) {
-
+		mp_stateRecorder->Record(initialState);
 	}
 
-	virtual void ExecuteCommand(std::function<void(TurtleState&)> func) {
+	TurtleState GetState() {
+		return m_state;
+	}
+
+	virtual void ExecuteCommand(std::function<void(TurtleState&)> func, bool shouldRecord) {
 		func(m_state);
-		PostExecute();
+		if (shouldRecord) {
+			PostExecute();
+		}
 	}
 
-protected:
+private:
 	virtual void PostExecute() {
 		mp_stateRecorder->Record(m_state);
 	}

@@ -7,7 +7,5 @@ class EmptyRecorder : public BaseRecorder {
 private:
 
 public:
-	virtual void Record(TurtleState state) {
-		// Do nothing.
-	}
+	virtual void Record(TurtleState state);
 };

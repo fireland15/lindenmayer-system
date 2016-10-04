@@ -29,5 +29,8 @@
     <ClCompile Include="VertexTurtleCommandSetTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InterpreterTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

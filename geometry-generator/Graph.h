@@ -48,6 +48,10 @@ public:
 
 			m_pEdgesOut.push_back(pEdge);
 		}
+
+		bool Equals(TNodeAttribute attribute) {
+			return m_attribute == attribute;
+		}
 	};
 
 	std::shared_ptr<Node> AddNode(TNodeAttribute nodeAttribute) {
@@ -73,6 +77,18 @@ public:
 		return pNewNode;
 	}
 
+	bool IsEmpty() {
+		return m_pNodes.empty();
+	}
+
+	std::shared_ptr<Node> FindNode(TNodeAttribute nodeAttribute) {
+		for (std::shared_ptr<Node> node : m_pNodes) {
+			if ((*node).Equals(nodeAttribute)) {
+				return node;
+			}
+		}
+		return nullptr;
+	}
 
 private:
 	std::list<std::shared_ptr<Node>> m_pNodes;

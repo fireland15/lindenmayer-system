@@ -23,19 +23,23 @@
     <ClInclude Include="EmptyRecorder.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="Graph.h" />
-    <ClInclude Include="GraphRecordInterpreter.h" />
-    <ClInclude Include="ListRecorder.h" />
-    <ClInclude Include="ListRecordInterpreter.h" />
+    <ClInclude Include="GraphRecorder.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="PointRecorder.h" />
     <ClInclude Include="RecorderFactory.h" />
     <ClInclude Include="Turtle.h" />
     <ClInclude Include="TurtleCommand.h" />
     <ClInclude Include="TurtleCommandFactory.h" />
-    <ClInclude Include="BaseRecordInterpreter.h" />
+    <ClInclude Include="RecordInterpreter.h" />
     <ClInclude Include="ITurtleCommandSet.h" />
     <ClInclude Include="TurtleFactory.h" />
     <ClInclude Include="LStringInterpreter.h" />
     <ClInclude Include="TurtleState.h" />
     <ClInclude Include="VertexTurtleCommandSet.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EmptyRecorder.cpp" />
+    <ClCompile Include="GeometryGenerator.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}</ProjectGuid>
@@ -92,6 +96,10 @@
     <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -110,7 +118,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions);_USE_MATH_DEFINES;</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,7 +151,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions);_USE_MATH_DEFINES;</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

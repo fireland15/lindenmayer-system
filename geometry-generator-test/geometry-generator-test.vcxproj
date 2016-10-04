@@ -78,12 +78,17 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\x64\Debug;C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,6 +118,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenMeshCored.lib;lindenmayer-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,6 +157,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OpenMeshCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -158,6 +165,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InterpreterTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -167,8 +175,14 @@
     <ClCompile Include="VertexTurtleCommandSetTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\expression-evaluator\expression-evaluator.vcxproj">
+      <Project>{65bacffe-b5fa-4372-99bd-18dd9c46f901}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\geometry-generator\geometry-generator.vcxproj">
       <Project>{52aa28d3-095b-4e1b-9b14-8e8bf72ea522}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lindenmayer-system\lindenmayer-system.vcxproj">
+      <Project>{c24229bf-ecab-432a-94b3-cdab3a8d5aa5}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -8,7 +8,7 @@
 
 class VertexTurtleCommandSet : public ITurtleCommandSet {
 public:
-	virtual BaseStateCmd GetForwardCommand(float length, bool draw = true) {
+	virtual TurtleCommandFunction GetForwardCommand(float length, bool draw = true) {
 		return [length](TurtleState& state) {
 			glm::vec3 pos = state.position;
 			pos = pos + (glm::normalize(state.orientation) * length);
@@ -16,52 +16,58 @@ public:
 		};
 	}
 
-	virtual BaseStateCmd GetYawLeftCommand(float angle) {
+	virtual TurtleCommandFunction GetYawLeftCommand(float angle) {
 		return [angle](TurtleState& state) {
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetYawRightCommand(float angle) {
+	virtual TurtleCommandFunction GetYawRightCommand(float angle) {
 		return [angle](TurtleState& state) { 
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(-angle), glm::vec3(0.0f, 1.0f, 0.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetPitchDownCommand(float angle) {
+	virtual TurtleCommandFunction GetPitchDownCommand(float angle) {
 		return [angle](TurtleState& state) { 
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(angle), glm::vec3(1.0f, 0.0f, 0.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetPitchUpCommand(float angle) {
+	virtual TurtleCommandFunction GetPitchUpCommand(float angle) {
 		return [angle](TurtleState& state) { 
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(-angle), glm::vec3(1.0f, 0.0f, 0.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetRollLeftCommand(float angle) {
+	virtual TurtleCommandFunction GetRollLeftCommand(float angle) {
 		return [angle](TurtleState& state) {
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(-angle), glm::vec3(0.0f, 0.0f, 1.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetRollRightCommand(float angle) {
+	virtual TurtleCommandFunction GetRollRightCommand(float angle) {
 		return [angle](TurtleState& state) { 
 			glm::vec3 o = glm::rotate(state.orientation, glm::radians(angle), glm::vec3(0.0f, 0.0f, 1.0f));
 			state.orientation = glm::normalize(o);
 		};
 	}
-	virtual BaseStateCmd GetTurnAroundCommand() {
-		return [](TurtleState& state) { return state; };
+	virtual TurtleCommandFunction GetTurnAroundCommand() {
+		return [](TurtleState& state) { 
+			glm::vec3 o = glm::normalize(-1.0f * state.orientation);
+			state.orientation = o;
+		};
 
 	}
-	virtual BaseStateCmd GetPushCommand() {
-		return [](TurtleState& state) { return state; };
+	virtual TurtleCommandFunction GetPushCommand() {
+		return [](TurtleState& state) { 
+			state.PushState();
+		};
 
 	}
-	virtual BaseStateCmd GetPopCommand() {
-		return [](TurtleState& state) { return state; };
-
+	virtual TurtleCommandFunction GetPopCommand() {
+		return [](TurtleState& state) { 
+			state.PopState();
+		};
 	}
 };

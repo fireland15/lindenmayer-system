@@ -27,6 +27,23 @@ public:
 		bool operator!=(Iterator& other);
 	};
 
+	class ConstIterator {
+	private:
+		const LindenmayerString& mc_parent;
+		int m_pos;
+
+	public:
+		ConstIterator(const LindenmayerString& parent, int pos);
+		bool AtStart();
+		bool AtEnd();
+		const LindenmayerSymbol& operator*();
+		const LindenmayerSymbol* operator->();
+		ConstIterator operator++();
+		ConstIterator operator--();
+		bool operator==(ConstIterator& other);
+		bool operator!=(ConstIterator& other);
+	};
+
 	LindenmayerString();
 	LindenmayerString(std::initializer_list<LindenmayerSymbol> symbols);	
 	void Add(LindenmayerSymbol symbol);
@@ -36,7 +53,9 @@ public:
 	size_t Size() const;
 	void Clear();
 	Iterator Begin();
+	ConstIterator Begin() const;
 	Iterator Last();
+	ConstIterator Last() const;
 	void swap(LindenmayerString& other);
 
 private:

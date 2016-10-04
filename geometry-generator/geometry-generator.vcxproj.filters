@@ -24,19 +24,7 @@
     <ClInclude Include="BaseRecorder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListRecorder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TurtleCommandFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseRecordInterpreter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphRecordInterpreter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ListRecordInterpreter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ITurtleCommandSet.h">
@@ -66,5 +54,25 @@
     <ClInclude Include="EmptyRecorder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RecordInterpreter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PointRecorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphRecorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EmptyRecorder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

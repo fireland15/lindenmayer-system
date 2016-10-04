@@ -12,6 +12,10 @@ char LindenmayerSymbol::GetSymbol() {
 	return m_symbol;
 }
 
+char LindenmayerSymbol::GetSymbol() const {
+	return m_symbol;
+}
+
 void LindenmayerSymbol::SetSymbol(char symbol) {
 	m_symbol = symbol;
 }

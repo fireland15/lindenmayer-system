@@ -14,6 +14,7 @@ public:
 	LindenmayerSymbol(char symbol);
 	LindenmayerSymbol(char symbol, std::vector<float> parameters);
 	char GetSymbol();
+	char GetSymbol() const;
 	void SetSymbol(char symbol);
 	std::vector<float>& GetParameters();
 	void SetParameters(std::vector<float> parameters);

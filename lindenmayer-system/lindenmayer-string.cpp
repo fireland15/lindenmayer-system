@@ -30,8 +30,16 @@ LindenmayerString::Iterator LindenmayerString::Begin() {
 	return Iterator(*this, 0);
 }
 
+LindenmayerString::ConstIterator LindenmayerString::Begin() const {
+	return ConstIterator(*this, 0);
+}
+
 LindenmayerString::Iterator LindenmayerString::Last() {
 	return Iterator(*this, (int) m_symbols.size() - 1);
+}
+
+LindenmayerString::ConstIterator LindenmayerString::Last() const {
+	return ConstIterator(*this, (int) m_symbols.size() - 1);
 }
 
 size_t LindenmayerString::Size() const {
@@ -83,5 +91,43 @@ bool LindenmayerString::Iterator::operator==(Iterator& other) {
 }
 
 bool LindenmayerString::Iterator::operator!=(Iterator& other) {
+	return this->operator*().GetSymbol() != other.operator*().GetSymbol();
+}
+
+LindenmayerString::ConstIterator::ConstIterator(const LindenmayerString & parent, int pos)
+	: mc_parent(parent), m_pos(pos) { }
+
+bool LindenmayerString::ConstIterator::AtStart() {
+	return m_pos <= -1;
+}
+
+bool LindenmayerString::ConstIterator::AtEnd() {
+	return (unsigned int)m_pos >= mc_parent.m_symbols.size();
+}
+
+const LindenmayerSymbol & LindenmayerString::ConstIterator::operator*() {
+	return mc_parent.m_symbols[m_pos];
+}
+
+const LindenmayerSymbol * LindenmayerString::ConstIterator::operator->() {
+	return &(mc_parent.m_symbols[m_pos]);
+}
+
+LindenmayerString::ConstIterator LindenmayerString::ConstIterator::operator++() {
+	++m_pos;
+	return *this;
+}
+
+LindenmayerString::ConstIterator LindenmayerString::ConstIterator::operator--() {
+	--m_pos;
+	return *this;
+}
+
+bool LindenmayerString::ConstIterator::operator==(ConstIterator & other) {
+	return this->operator*().GetSymbol() == other.operator*().GetSymbol();
+
+}
+
+bool LindenmayerString::ConstIterator::operator!=(ConstIterator & other) {
 	return this->operator*().GetSymbol() != other.operator*().GetSymbol();
 }

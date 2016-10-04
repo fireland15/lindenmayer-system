@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "ListRecorder.h"
+#include "BaseRecorder.h"
 #include "TurtleState.h"
 
 enum TurtleType {
@@ -21,7 +21,6 @@ public:
 private:
 	static TurtleState MakeInitState() {
 		TurtleState initState;
-		initState.up = glm::vec3(0.0f, 1.0f, 0.0f);
 		initState.position = glm::vec3(0.0f, 0.0f, 0.0f);
 		initState.orientation = glm::vec3(0.0f, 1.0f, 0.0f);
 		return initState;
