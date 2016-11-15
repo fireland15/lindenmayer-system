@@ -27,6 +27,10 @@ public:
 			m_pNodeTo = nodeTo;
 			m_attribute = attribute;
 		}
+
+		std::shared_ptr<Node> get_NodeTo() {
+			return m_pNodeTo;
+		}
 	};
 
 	class Node {
@@ -51,6 +55,20 @@ public:
 
 		bool Equals(TNodeAttribute attribute) {
 			return m_attribute == attribute;
+		}
+
+		std::list<std::shared_ptr<Node>> get_Children() {
+			std::list<std::shared_ptr<Node>> children;
+
+			for (std::shared_ptr<Edge> pEdge : m_pEdgesOut) {
+				children.push_back(pEdge->get_NodeTo());
+			}
+
+			return children;
+		}
+
+		TNodeAttribute get_Value() {
+			return m_attribute;
 		}
 	};
 
@@ -88,6 +106,14 @@ public:
 			}
 		}
 		return nullptr;
+	}
+
+	std::shared_ptr<Node> get_RootNode() {
+		return m_pRootNode;
+	}
+
+	std::list<std::shared_ptr<Node>> get_AllNodes() {
+		return m_pNodes;
 	}
 
 private:

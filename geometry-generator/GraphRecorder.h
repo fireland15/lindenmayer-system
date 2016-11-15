@@ -26,4 +26,8 @@ public:
 			m_lastNode = node;
 		}
 	}
+
+	Graph<float, glm::vec3> get_Graph() {
+		return m_graph;
+	}
 };

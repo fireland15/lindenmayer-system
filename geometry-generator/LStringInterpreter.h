@@ -31,6 +31,12 @@ public:
 		mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
 	}
 
+	LStringInterpreter(RecorderType recorderType)
+		: m_commandFactory(TurtleCommandFactory(std::unique_ptr<ITurtleCommandSet>(new VertexTurtleCommandSet()))) {
+		mp_recorder = RecorderFactory::MakeRecorder(recorderType);
+		mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
+	}
+
 	std::unique_ptr<Mesh> Interpret(const LindenmayerString& lString) {
 		// Todo: Interpret l string.
 		LindenmayerString::ConstIterator it = lString.Begin();

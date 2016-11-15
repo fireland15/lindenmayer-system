@@ -21,7 +21,7 @@ public:
 			return TurtleCommand(m_commandSet->GetForwardCommand(symbol.GetParameters()[0]), true);
 			break;
 		case 'f': // Forward length d, f(d), without drawing
-			return TurtleCommand(m_commandSet->GetForwardCommand(symbol.GetParameters()[0], false), true);
+			return TurtleCommand(m_commandSet->GetForwardCommand(symbol.GetParameters()[0], true), true);
 			break;
 		case 'Y': // Yaw left by angle a, +(a)
 			return TurtleCommand(m_commandSet->GetYawLeftCommand(symbol.GetParameters()[0]), false);
