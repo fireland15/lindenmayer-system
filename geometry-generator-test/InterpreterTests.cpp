@@ -194,7 +194,7 @@ namespace geometrygeneratortest {
 
 		TEST_METHOD(GraphRecorderTest) {
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(10)-p(22.5)-B()-B()-f(10)-b()-P(22.5)-f(10)-b()-P(22.5)-F(10)-B()-P(22.5)-F(10)-f(10)-b()-p(22.5)-f(10)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-p(22.5)-B()-B()-f(a)-b()-P(22.5)-f(a)-b()-P(22.5)-F(a)-B()-P(22.5)-F(a)-f(a)-b()-p(22.5)-f(a)"))));
 			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
 			LindenmayerString lString;
 			lString.Add(LindenmayerSymbol('f', { 10 }));
@@ -223,17 +223,17 @@ namespace geometrygeneratortest {
 			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-P(25.7)-f(a)-b()-B()-p(25.7)-f(a)-b()-F(a)-f(a)"))));
 			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
 			LindenmayerString lString;
-			lString.Add(LindenmayerSymbol('f', { 5 }));
+			lString.Add(LindenmayerSymbol('f', { 10 }));
 
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
-			LindenmayerString result = system.Run(4);
+			LindenmayerString result = system.Run(5);
 
 			LStringInterpreter interpreter(RecorderType::Graph);
 			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
 
 			try
 			{
-				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "test6.obj", OpenMesh::IO::Options::ColorFloat))
+				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "test6tubes.obj", OpenMesh::IO::Options::ColorFloat))
 				{
 					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
 				}

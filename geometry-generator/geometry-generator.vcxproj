@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRecorder.h" />
+    <ClInclude Include="CrossSection.h" />
     <ClInclude Include="EmptyRecorder.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="Graph.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PointRecorder.h" />
     <ClInclude Include="RecorderFactory.h" />
+    <ClInclude Include="TileTree.h" />
     <ClInclude Include="Turtle.h" />
     <ClInclude Include="TurtleCommand.h" />
     <ClInclude Include="TurtleCommandFactory.h" />
