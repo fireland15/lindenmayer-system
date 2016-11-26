@@ -43,6 +43,14 @@
     <ClCompile Include="EmptyRecorder.cpp" />
     <ClCompile Include="GeometryGenerator.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\expression-evaluator\expression-evaluator.vcxproj">
+      <Project>{65bacffe-b5fa-4372-99bd-18dd9c46f901}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lindenmayer-system\lindenmayer-system.vcxproj">
+      <Project>{c24229bf-ecab-432a-94b3-cdab3a8d5aa5}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52AA28D3-095B-4E1B-9B14-8E8BF72EA522}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -95,12 +103,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\openmesh\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\openmesh\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

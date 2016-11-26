@@ -79,16 +79,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\x64\Debug;C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Debug;$(SolutionDir)\openmesh\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);</LibraryPath>
+    <IncludePath>$(SolutionDir)\openmesh\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Forrest\Desktop\lindenmayer-system\openmesh\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\openmesh\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\x64\Debug;$(SolutionDir)\openmesh\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
