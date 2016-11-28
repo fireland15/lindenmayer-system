@@ -96,27 +96,61 @@ private:
 		}
 	}
 
-	std::shared_ptr<Node> FindStraightestChild(const glm::vec3& dir, glm::vec3 fromPoint, std::list<std::shared_ptr<Node>> childrenPoints) { }
-	CrossSection MakeCrossSection(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, glm::vec3 p4) { }
+	std::shared_ptr<Node> FindStraightestChild(const glm::vec3& dir, glm::vec3 fromPoint, std::list<std::shared_ptr<Node>> childrenPoints) { 
+		std::shared_ptr<Node> straightestChild = nullptr;
+		float closestChildAngle = M_PI;
+
+		for (std::shared_ptr<Node> child : childrenPoints) {
+			float angle = FindAngle(child->get_Value() - fromPoint, dir);
+
+			if (angle < closestChildAngle) {
+				straightestChild = child;
+				closestChildAngle = angle;
+			}
+		}
+	}
+
+	CrossSection MakeCrossSection(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, glm::vec3 p4) { 
+		CrossSection cs;
+		cs.vertices[0] = m_pMesh->add_vertex(OpenMesh::Vec3f(p1.x, p1.y, p1.z));
+		cs.vertices[1] = m_pMesh->add_vertex(OpenMesh::Vec3f(p2.x, p2.y, p2.z));
+		cs.vertices[2] = m_pMesh->add_vertex(OpenMesh::Vec3f(p3.x, p3.y, p3.z));
+		cs.vertices[3] = m_pMesh->add_vertex(OpenMesh::Vec3f(p4.x, p4.y, p4.z));
+		return cs;
+	}
 
 	std::list<std::shared_ptr<Node>> FilterChildrenInQuadrant(int quadrant, glm::vec3 dir, std::list<std::shared_ptr<Node>> children) {
 		glm::vec3 norm = glm::normalize(dir);
 		glm::vec3 p = glm::normalize(FindPerpendicular(dir, m_referenceVector));
 		glm::vec3 q = glm::normalize(FindPerpendicular(dir, p));
 
+		std::list<std::shared_ptr<Node>> filteredChildren;
+
 		for (std::shared_ptr<Node> child : children) {
 			glm::vec3 proj = child->get_Value() - glm::dot(child->get_Value(), norm) * norm;
-			float angleP = std::acos(glm::dot(glm::normalize(proj), glm::normalize(p)));
-			float angleQ = std::acos(glm::dot(glm::normalize(proj), glm::normalize(q)));
+			float angleP = FindAngle(proj, p);
+			float angleQ = FindAngle(proj, q);
 
 			switch (quadrant) {
 			case 0:
+				if (angleP < M_PI_2 && angleQ < M_PI_2) {
+					filteredChildren.push_back(child);
+				}
 				break;
 			case 1:
+				if (angleP > M_PI_2 && angleQ < M_PI_2) {
+					filteredChildren.push_back(child);
+				}
 				break;
 			case 2:
+				if (angleP > M_PI_2 && angleQ > M_PI_2) {
+					filteredChildren.push_back(child);
+				}
 				break;
 			case 3:
+				if (angleP < M_PI_2 && angleQ > M_PI_2) {
+					filteredChildren.push_back(child);
+				}
 				break;
 			}
 		}
@@ -178,5 +212,9 @@ private:
 
 	glm::vec3 FindPerpendicular(glm::vec3 p, glm::vec3 q) {
 		return glm::normalize(glm::cross(p, q));
+	}
+
+	float FindAngle(glm::vec3 p, glm::vec3 q) {
+		return std::acos(glm::dot(glm::normalize(p), glm::normalize(q)));
 	}
 };
