@@ -17,12 +17,15 @@
 #include "VertexTurtleCommandSet.h"
 #include "RecordInterpreter.h"
 #include "Mesh.h"
+#include "Enums.h"
 
 class LStringInterpreter {
 private:
 	TurtleCommandFactory m_commandFactory;
 	std::unique_ptr<Turtle> mp_turtle;
 	std::shared_ptr<BaseRecorder> mp_recorder;
+
+	GeometryType m_geometryType;
 
 public:
 	LStringInterpreter()
@@ -37,6 +40,25 @@ public:
 		mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
 	}
 
+	LStringInterpreter(GeometryType geometryType)
+		: m_commandFactory(TurtleCommandFactory(std::unique_ptr<ITurtleCommandSet>(new VertexTurtleCommandSet()))) {
+		m_geometryType = geometryType;
+
+		switch (geometryType) {
+		case GeometryType::Points:
+			mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Point);
+			break;
+		case GeometryType::Tubes:
+		case GeometryType::Smooth:
+			mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Graph);
+			break;
+		default:
+			mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Empty);
+			break;
+		}
+		mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
+	}
+
 	std::unique_ptr<Mesh> Interpret(const LindenmayerString& lString) {
 		// Todo: Interpret l string.
 		LindenmayerString::ConstIterator it = lString.Begin();
@@ -47,7 +69,7 @@ public:
 		}
 
 		RecordInterpreter interpreter;
-		std::unique_ptr<Mesh> mesh = interpreter.Interpret(mp_recorder);
+		std::unique_ptr<Mesh> mesh = interpreter.Interpret(mp_recorder, m_geometryType);
 		return mesh;
 	}
 };

@@ -3,5 +3,5 @@
 #include "Mesh.h"
 
 struct CrossSection {
-	Mesh::VertexHandle vertices[4]
+	Mesh::VertexHandle vertices[4];
 };

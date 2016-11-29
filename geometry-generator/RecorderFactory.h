@@ -23,8 +23,6 @@ public:
 			return std::shared_ptr<BaseRecorder>(new PointRecorder);
 		case RecorderType::Graph:
 			return std::shared_ptr<BaseRecorder>(new GraphRecorder);
-		default:
-			break;
 		}
 	}
 };

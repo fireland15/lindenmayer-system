@@ -243,5 +243,31 @@ namespace geometrygeneratortest {
 				std::cerr << x.what() << std::endl;
 			}
 		}
+
+		TEST_METHOD(TestSmooth) {
+			std::vector<ProductionRule> rules;
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-P(25.7)-f(a)-b()-B()-p(25.7)-f(a)-b()-F(a)-f(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
+			LindenmayerString lString;
+			lString.Add(LindenmayerSymbol('f', { 10 }));
+
+			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
+			LindenmayerString result = system.Run(5);
+
+			LStringInterpreter interpreter(GeometryType::Smooth);
+			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
+
+			try
+			{
+				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "testsmooth.obj", OpenMesh::IO::Options::ColorFloat))
+				{
+					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
+				}
+			}
+			catch (std::exception& x)
+			{
+				std::cerr << x.what() << std::endl;
+			}
+		}
 	};
 }

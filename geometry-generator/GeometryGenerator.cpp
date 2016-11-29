@@ -1,16 +1,24 @@
 #include "GeometryGenerator.h"
 
-GeometryGenerator::GeometryGenerator() { }
-
-std::unique_ptr<Mesh> GeometryGenerator::Generate(const LindenmayerString& lString, GeometryType type) {
-	switch (type) {
+GeometryGenerator::GeometryGenerator(GeometryType geometryType) {
+	switch (geometryType) {
 	case GeometryType::Points:
-		return m_interpreter.Interpret(lString);
+		m_interpreter = LStringInterpreter(RecorderType::Point);
 		break;
 	case GeometryType::Lines:
-		return m_interpreter.Interpret(lString);
+		m_interpreter = LStringInterpreter(RecorderType::Graph);
+		break;
+	case GeometryType::Tubes:
+		m_interpreter = LStringInterpreter(RecorderType::Graph);
+		break;
+	case GeometryType::Smooth:
+		m_interpreter = LStringInterpreter(RecorderType::Graph);
 		break;
 	default:
 		break;
 	}
+}
+
+std::unique_ptr<Mesh> GeometryGenerator::Generate(const LindenmayerString& lString) {
+	return m_interpreter.Interpret(lString);
 }

@@ -8,21 +8,40 @@
 #include "Mesh.h"
 #include "CrossSection.h"
 
-typedef Graph<int, glm::vec3>::Node Node;
+#ifndef M_PI
+#define M_PI 3.14159265368979323846
+#endif
+
+#ifndef M_PI_2
+#define M_PI_2 M_PI / 2
+#endif
+
+typedef Graph<float, glm::vec3>::Node Node;
 
 class TileTree {
 private:
 	Mesh* m_pMesh = nullptr;
 	glm::vec3 m_referenceVector;
-	Graph<int, glm::vec3> m_tree;
+	Graph<float, glm::vec3> m_tree;
 	std::map<std::shared_ptr<Node>, float> m_branchWidths;
 	std::map<std::shared_ptr<Node>, CrossSection> m_crossSections;
 
 public:
-	TileTree(Graph<int, glm::vec3> tree)
+	TileTree(Graph<float, glm::vec3> tree)
 		: m_tree(tree) { 
 		m_pMesh = new Mesh;
 		m_referenceVector = glm::vec3(1.0F, 0.0F, 0.0F);
+	}
+
+	std::unique_ptr<Mesh> Tile() {
+		std::shared_ptr<Node> rootNode = m_tree.get_RootNode();
+
+		if (rootNode != nullptr) {
+			Tile(rootNode, glm::vec3(0.0F, 1.0F, 0.0F));
+			return std::unique_ptr<Mesh>(m_pMesh);
+		}
+
+		return nullptr;
 	}
 
 private:
@@ -31,13 +50,23 @@ private:
 
 		if (childCount == 0) {
 			// CloseTube(pMesh, pCurrent.CrossSection)
-			CloseCrossSection(m_crossSections[pCurrent]);
+			if (m_crossSections.count(pCurrent) == 0) {
+
+			}
+			else {
+				CloseCrossSection(m_crossSections[pCurrent]);
+			}
 		}
 		else if (childCount == 1) {
 			// MakeTube(pMesh, pCurrent.Parent.CrossSection, pCurrent.CrossSection)
 			// Tile(pMesh, pCurrent.Child)
 			std::shared_ptr<Node> child = pCurrent->get_Children().front();
-			MakeTube(m_crossSections[pCurrent], pCurrent->get_Value(), child->get_Value(), m_branchWidths[child]);
+			if (m_crossSections.count(pCurrent) == 0) {
+				MakeTube(MakeCrossSection(pCurrent->get_Value(), glm::vec3(0.0F, 1.0F, 0.0F), 1.0F), pCurrent->get_Value(), child->get_Value(), 1.0F);
+			}
+			else {
+				MakeTube(m_crossSections[pCurrent], pCurrent->get_Value(), child->get_Value(), 1.0F);
+			}
 			Tile(child, glm::normalize(child->get_Value() - pCurrent->get_Value()));
 		}
 		else {
@@ -108,6 +137,7 @@ private:
 				closestChildAngle = angle;
 			}
 		}
+		return straightestChild;
 	}
 
 	CrossSection MakeCrossSection(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, glm::vec3 p4) { 
@@ -154,6 +184,8 @@ private:
 				break;
 			}
 		}
+
+		return filteredChildren;
 	}
 
 	// Make Geometry Functions
@@ -171,13 +203,10 @@ private:
 		glm::vec3 c = point - p1 * radius;
 		glm::vec3 d = point - p0 * radius;
 
-		CrossSection cs;
-		cs.vertices[0] = m_pMesh->add_vertex(OpenMesh::Vec3f(a.x, a.y, a.z));
-		cs.vertices[1] = m_pMesh->add_vertex(OpenMesh::Vec3f(b.x, b.y, a.z));
-		cs.vertices[2] = m_pMesh->add_vertex(OpenMesh::Vec3f(c.x, c.y, c.z));
-		cs.vertices[3] = m_pMesh->add_vertex(OpenMesh::Vec3f(d.x, d.y, d.z));
-
-		return cs;
+		return MakeCrossSection(m_pMesh->add_vertex(OpenMesh::Vec3f(a.x, a.y, a.z)),
+								m_pMesh->add_vertex(OpenMesh::Vec3f(b.x, b.y, a.z)),
+								m_pMesh->add_vertex(OpenMesh::Vec3f(c.x, c.y, c.z)),
+								m_pMesh->add_vertex(OpenMesh::Vec3f(d.x, d.y, d.z)));
 	}
 
 	CrossSection MakeCrossSection(Mesh::VertexHandle v0, Mesh::VertexHandle v1, Mesh::VertexHandle v2, Mesh::VertexHandle v3) {

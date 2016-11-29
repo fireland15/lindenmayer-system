@@ -9,6 +9,8 @@
 #include "EmptyRecorder.h"
 #include "PointRecorder.h"
 #include "Mesh.h"
+#include "Enums.h"
+#include "TileTree.h"
 
 typedef Graph<float, glm::vec3>::Node Node;
 
@@ -17,7 +19,7 @@ private:
 	const float m_leafRadius = 0.5f;
 
 public: 
-	std::unique_ptr<Mesh> Interpret(std::shared_ptr<BaseRecorder> recorder) {
+	std::unique_ptr<Mesh> Interpret(std::shared_ptr<BaseRecorder> recorder, GeometryType geometryType = GeometryType::Points) {
 		if (dynamic_cast<EmptyRecorder*>(recorder.get())) {
 			return InterpretEmptyRecorder(static_cast<EmptyRecorder*>(recorder.get()));
 		}
@@ -25,7 +27,15 @@ public:
 			return InterpretPointRecorderWithTriangles(static_cast<PointRecorder*>(recorder.get()));
 		}
 		else if (dynamic_cast<GraphRecorder*>(recorder.get())) {
-			return InterpretGraphRecorder(static_cast<GraphRecorder*>(recorder.get()));
+			if (geometryType == GeometryType::Points) {
+				return InterpretGraphRecorderPoints(static_cast<GraphRecorder*>(recorder.get()));
+			}
+			else if (geometryType == GeometryType::Tubes) {
+				return InterpretGraphRecorderTubes(static_cast<GraphRecorder*>(recorder.get()));
+			}
+			else if (geometryType == GeometryType::Smooth) {
+				return InterpretGraphRecorderSmooth(static_cast<GraphRecorder*>(recorder.get()));
+			}
 		}
 		return std::unique_ptr<Mesh>(nullptr);
 	}
@@ -72,7 +82,7 @@ private:
 		return std::unique_ptr<Mesh>(mesh);
 	}
 
-	std::unique_ptr<Mesh> InterpretGraphRecorder(GraphRecorder* graphRecorder) {
+	std::unique_ptr<Mesh> InterpretGraphRecorderPoints(GraphRecorder* graphRecorder) {
 		Mesh* mesh = new Mesh;
 
 		Graph<float, glm::vec3> graph = graphRecorder->get_Graph();
@@ -84,6 +94,15 @@ private:
 		}
 
 		return std::unique_ptr<Mesh>(mesh);
+	}
+
+	std::unique_ptr<Mesh> InterpretGraphRecorderTubes(GraphRecorder* graphRecorder) {
+		return nullptr;
+	}
+
+	std::unique_ptr<Mesh> InterpretGraphRecorderSmooth(GraphRecorder* graphRecorder) {
+		TileTree tileTree(graphRecorder->get_Graph());
+		return tileTree.Tile();
 	}
 
 	float DrawChild(Mesh* mesh, std::shared_ptr<Node> current, std::shared_ptr<Node> parent) {

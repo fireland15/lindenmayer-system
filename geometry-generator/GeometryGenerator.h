@@ -8,18 +8,14 @@
 
 #include "LStringInterpreter.h"
 #include "Mesh.h"
-
-enum GeometryType {
-	Points,
-	Lines
-};
+#include "Enums.h"
 
 class GeometryGenerator {
 private:
 	LStringInterpreter m_interpreter;
 
 public:
-	GeometryGenerator();
+	GeometryGenerator(GeometryType geometryType);
 
-	std::unique_ptr<Mesh> Generate(const LindenmayerString& lString, GeometryType type);
+	std::unique_ptr<Mesh> Generate(const LindenmayerString& lString);
 };
