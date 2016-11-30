@@ -26,6 +26,7 @@
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphRecorder.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PointRecorder.h" />
     <ClInclude Include="RecorderFactory.h" />

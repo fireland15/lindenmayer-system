@@ -76,7 +76,9 @@ private:
 	}
 
 	void TileJoint(std::shared_ptr<Node> parentNode, const glm::vec3& dir) {
-		TileJoint(parentNode, parentNode->get_Children(), m_crossSections[parentNode], dir);
+		TileJoint(parentNode, parentNode->get_Children(), MakeCrossSection(parentNode->get_Value(), glm::vec3(0.0F, 1.0F, 0.0F), 1.0F), dir);
+		
+		//TileJoint(parentNode, parentNode->get_Children(), m_crossSections[parentNode], dir);
 	}
 
 	void TileJoint(std::shared_ptr<Node> parentNode, std::list<std::shared_ptr<Node>> childrenNodes, const CrossSection parentCrossSection, const glm::vec3& dir) { 

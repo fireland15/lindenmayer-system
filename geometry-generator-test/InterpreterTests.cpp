@@ -202,7 +202,7 @@ namespace geometrygeneratortest {
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
 			LindenmayerString result = system.Run(3);
 
-			LStringInterpreter interpreter(RecorderType::Graph);
+			LStringInterpreter interpreter(GeometryType::Tubes);
 			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
 
 			try
@@ -226,9 +226,9 @@ namespace geometrygeneratortest {
 			lString.Add(LindenmayerSymbol('f', { 10 }));
 
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
-			LindenmayerString result = system.Run(5);
+			LindenmayerString result = system.Run(2);
 
-			LStringInterpreter interpreter(RecorderType::Graph);
+			LStringInterpreter interpreter(GeometryType::Tubes);
 			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
 
 			try
@@ -252,7 +252,7 @@ namespace geometrygeneratortest {
 			lString.Add(LindenmayerSymbol('f', { 10 }));
 
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
-			LindenmayerString result = system.Run(5);
+			LindenmayerString result = system.Run(2);
 
 			LStringInterpreter interpreter(GeometryType::Smooth);
 			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);

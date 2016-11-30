@@ -97,7 +97,17 @@ private:
 	}
 
 	std::unique_ptr<Mesh> InterpretGraphRecorderTubes(GraphRecorder* graphRecorder) {
-		return nullptr;
+		Mesh* mesh = new Mesh;
+
+		Graph<float, glm::vec3> graph = graphRecorder->get_Graph();
+
+		std::shared_ptr<Node> root = graph.get_RootNode();
+
+		for (auto child : root->get_Children()) {
+			DrawChild(mesh, child, root);
+		}
+
+		return std::unique_ptr<Mesh>(mesh);
 	}
 
 	std::unique_ptr<Mesh> InterpretGraphRecorderSmooth(GraphRecorder* graphRecorder) {
