@@ -2,6 +2,10 @@
 
 #include "Mesh.h"
 
-struct CrossSection {
-	Mesh::VertexHandle vertices[4];
-};
+namespace fli {
+	namespace geometry_generator {
+		struct CrossSection {
+			Mesh::VertexHandle vertices[4];
+		};
+	}
+}

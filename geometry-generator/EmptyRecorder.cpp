@@ -1,5 +1,9 @@
 #include "EmptyRecorder.h"
 
-void EmptyRecorder::Record(TurtleState state) {
-	// Do Nothing
+namespace fli {
+	namespace geometry_generator {
+		void EmptyRecorder::Record(TurtleState state) {
+			// Do Nothing
+		}
+	}
 }

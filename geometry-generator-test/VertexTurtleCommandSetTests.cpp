@@ -5,6 +5,7 @@
 #include "../geometry-generator/TurtleState.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace fli::geometry_generator;
 
 namespace geometrygeneratortest{
 	TEST_CLASS(VertexTurtleCommandSetTests) {

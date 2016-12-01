@@ -26,13 +26,23 @@ namespace fli {
 	namespace geometry_generator {
 		namespace math {
 			// TODO: add xml comments to document the requirement for a and b to be normalized.
-			float vectorAngleRadians(glm::vec3 a, glm::vec3 b) {
+			inline float vectorAngleRadians(glm::vec3 a, glm::vec3 b) {
+				if (a == b) {
+					return 0.00F;
+				}
 				return std::acos(glm::dot(a, b));
 			}
 
 			// TODO: add xml comments to document the requirement for a and b to be normalized.
-			float vectorAngleDegrees(glm::vec3 a, glm::vec3 b) {
+			inline float vectorAngleDegrees(glm::vec3 a, glm::vec3 b) {
+				if (a == b) {
+					return 0.00F;
+				}
 				return glm::degrees(std::acos(glm::dot(a, b)));
+			}
+
+			inline glm::vec3 makeDirection(glm::vec3 to, glm::vec3 from) {
+				return glm::normalize(to - from);
 			}
 		}
 	}
