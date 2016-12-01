@@ -10,6 +10,7 @@
 #include "../geometry-generator/Math.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace fli::geometry_generator::math;
 
 namespace geometrygeneratortest {
 	TEST_CLASS(vectorAngleTests) {

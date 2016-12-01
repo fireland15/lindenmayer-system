@@ -1,9 +1,23 @@
 #pragma once
 
-enum GeometryType {
-	Points,
-	Lines,
-	Tubes,
-	Smooth
-};
+namespace fli {
+	namespace geometry_generator {
+		enum class GeometryType {
+			Points,
+			Lines,
+			Tubes,
+			Smooth
+		};
 
+		enum class RecorderType {
+			Empty,
+			Point,
+			Graph
+		};
+
+		enum class TurtleType {
+			Base,
+			ListRecorded
+		};
+	}
+}

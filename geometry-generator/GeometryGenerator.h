@@ -10,12 +10,16 @@
 #include "Mesh.h"
 #include "Enums.h"
 
-class GeometryGenerator {
-private:
-	LStringInterpreter m_interpreter;
+namespace fli {
+	namespace geometry_generator {
+		class GeometryGenerator {
+		private:
+			LStringInterpreter m_interpreter;
 
-public:
-	GeometryGenerator(GeometryType geometryType);
+		public:
+			GeometryGenerator(GeometryType geometryType);
 
-	std::unique_ptr<Mesh> Generate(const LindenmayerString& lString);
-};
+			std::unique_ptr<Mesh> Generate(const LindenmayerString& lString);
+		};
+	}
+}

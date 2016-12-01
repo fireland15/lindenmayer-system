@@ -15,6 +15,7 @@
 #include "../geometry-generator/Mesh.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace fli::geometry_generator;
 
 namespace geometrygeneratortest {
 	TEST_CLASS(InterpreterTest) {

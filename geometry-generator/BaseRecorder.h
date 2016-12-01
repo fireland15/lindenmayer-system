@@ -2,9 +2,13 @@
 
 #include "TurtleState.h"
 
-class BaseRecorder {
-private:
+namespace fli {
+	namespace geometry_generator {
+		class BaseRecorder {
+		private:
 
-public:
-	virtual void Record(TurtleState state) = 0;
-};
+		public:
+			virtual void Record(TurtleState state) = 0;
+		};
+	}
+}
