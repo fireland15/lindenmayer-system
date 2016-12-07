@@ -10,8 +10,16 @@
 #define M_PI_2 M_PI / 2
 #endif
 
+#ifndef M_PI_3
+#define M_PI_3 M_PI / 3
+#endif
+
 #ifndef M_PI_4
 #define M_PI_4 M_PI / 4
+#endif
+
+#ifndef M_PI_6
+#define M_PI_6 M_PI / 6
 #endif
 
 namespace fli {
