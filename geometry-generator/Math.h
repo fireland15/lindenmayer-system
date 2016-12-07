@@ -33,8 +33,19 @@ namespace fli {
 				return glm::degrees(std::acos(glm::dot(a, b)));
 			}
 
-			inline glm::vec3 makeDirection(glm::vec3 to, glm::vec3 from) {
+			inline glm::vec3 direction(glm::vec3 to, glm::vec3 from) {
 				return glm::normalize(to - from);
+			}
+
+			inline float distance(glm::vec3 a, glm::vec3 b) {
+				return glm::distance(a, b);
+			}
+
+			inline glm::vec3 projectToPlane(glm::vec3 n, glm::vec3 v) {
+				glm::vec3 o = glm::cross(n, v);
+				glm::vec3 projOnto = glm::cross(n, o);
+
+				return (glm::dot(projOnto, v) / (projOnto.length() * projOnto.length())) * projOnto;
 			}
 		}
 	}

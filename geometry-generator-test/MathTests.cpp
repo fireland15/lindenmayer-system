@@ -50,5 +50,14 @@ namespace geometrygeneratortest {
 
 			Assert::AreEqual((float)M_PI_2, result);
 		}
+
+		TEST_METHOD(TestProjectToPlane) {
+			glm::vec3 n(0.0F, 1.0F, 1.0F);
+			glm::vec3 v(0.0F, 1.0F, 0.0F);
+
+			glm::vec3 proj = fli::geometry_generator::math::projectToPlane(glm::normalize(n), v);
+
+
+		}
 	};
 }
