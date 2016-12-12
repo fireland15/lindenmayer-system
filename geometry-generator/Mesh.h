@@ -11,6 +11,6 @@ namespace fli {
 			FaceAttributes(OpenMesh::Attributes::Normal | OpenMesh::Attributes::Color);
 		};
 
-		typedef OpenMesh::TriMesh_ArrayKernelT<MeshTraits> Mesh;
+		typedef OpenMesh::PolyMesh_ArrayKernelT<MeshTraits> Mesh;
 	}
 }

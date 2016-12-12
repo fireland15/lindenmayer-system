@@ -4,6 +4,7 @@
 
 #include <OpenMesh\Core\Mesh\PolyMesh_ArrayKernelT.hh>
 #include <OpenMesh\Core\IO\MeshIO.hh>
+#include <OpenMesh/Tools/Subdivider/Uniform/CatmullClarkT.hh>
 #include <memory>
 
 #include "../geometry-generator/LStringInterpreter.h"
@@ -248,19 +249,58 @@ namespace geometrygeneratortest {
 		TEST_METHOD(TestSmooth) {
 			std::vector<ProductionRule> rules;
 			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-P(25.7)-f(a)-b()-B()-p(25.7)-f(a)-b()-F(a)-f(a)"))));
+			//rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-P(25.7)-f(a)-b()-B()-p(25.7)-f(a)-b()-B()-Y(25.7)-f(a)-b()-F(a)-f(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
+			LindenmayerString lString;
+			lString.Add(LindenmayerSymbol('f', { 20 }));
+
+			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
+			LindenmayerString result = system.Run(4);
+
+			LStringInterpreter interpreter(GeometryType::Smooth);
+			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
+
+			OpenMesh::Subdivider::Uniform::CatmullClarkT<Mesh> catmull;
+
+			catmull.attach(*mesh);
+			catmull(1);
+			catmull.detach();
+
+			try
+			{
+				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "testsmooth.obj", OpenMesh::IO::Options::ColorFloat))
+				{
+					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
+				}
+			}
+			catch (std::exception& x)
+			{
+				std::cerr << x.what() << std::endl;
+			}
+		}
+
+		TEST_METHOD(TestSmooth2) {
+			std::vector<ProductionRule> rules;
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-p(22.5)-B()-B()-f(a)-b()-P(22.5)-f(a)-b()-P(22.5)-F(a)-B()-P(22.5)-F(a)-f(a)-b()-p(22.5)-f(a)"))));
 			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
 			LindenmayerString lString;
 			lString.Add(LindenmayerSymbol('f', { 10 }));
 
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
-			LindenmayerString result = system.Run(2);
+			LindenmayerString result = system.Run(4);
 
 			LStringInterpreter interpreter(GeometryType::Smooth);
 			std::unique_ptr<Mesh> mesh = interpreter.Interpret(result);
 
+			OpenMesh::Subdivider::Uniform::CatmullClarkT<Mesh> catmull;
+
+			catmull.attach(*mesh);
+			catmull(1);
+			catmull.detach();
+
 			try
 			{
-				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "testsmooth.obj", OpenMesh::IO::Options::ColorFloat))
+				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "testsmooth2.obj", OpenMesh::IO::Options::ColorFloat))
 				{
 					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
 				}

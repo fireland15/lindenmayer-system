@@ -21,6 +21,8 @@ namespace fli {
 			Graph<float, glm::vec3> m_tree;
 			std::map<std::shared_ptr<Node>, float> m_branchWidths;
 			std::map<std::shared_ptr<Node>, CrossSection> m_crossSections;
+			std::map<std::shared_ptr<Node>, glm::vec3> m_directions;
+			std::map<std::shared_ptr<Node>, glm::vec3> m_referenceVec;
 			float m_minBranchRadius = 0.5F;
 			glm::vec3 m_upVector = glm::vec3(0.0F, 1.0F, 0.0F);
 
@@ -36,6 +38,12 @@ namespace fli {
 
 				if (rootNode != nullptr) {
 					DetermineBranchWidth(rootNode, m_minBranchRadius);
+					m_directions[rootNode] = m_upVector;
+					DetermineDirection(rootNode);
+					m_referenceVec[rootNode] = m_referenceVector;
+					DetermineReferenceVectors(rootNode);
+					DetermineCrossSections(rootNode, glm::vec3());
+
 					Tile(rootNode);
 					return std::unique_ptr<Mesh>(m_pMesh);
 				}
@@ -48,7 +56,7 @@ namespace fli {
 				std::queue<std::shared_ptr<Node>> queue;
 				queue.push(rootNode);
 
-				m_crossSections[rootNode] = MakeCrossSection(rootNode->get_Value(), m_upVector, m_branchWidths[rootNode]);
+				//m_crossSections[rootNode] = MakeCrossSection(rootNode->get_Value(), m_directions[rootNode], m_referenceVec[rootNode], m_branchWidths[rootNode]);
 
 				while (!queue.empty()) {
 					std::shared_ptr<Node> node = queue.front();
@@ -62,17 +70,123 @@ namespace fli {
 					else if (children.size() == 1) {
 						auto child = children.front();
 						glm::vec3 dir = math::direction(child->get_Value(), node->get_Value());
-						m_crossSections[child] = MakeCrossSection(child->get_Value(), dir, m_branchWidths[child]);
+						//m_crossSections[child] = MakeCrossSection(child->get_Value(), m_directions[child], m_referenceVec[child], m_branchWidths[child]);
 						MakeTube(m_crossSections[node], m_crossSections[child]);
 						queue.push(child);
 					}
 					else {
+						TileJoint(node);
 						for (auto child : children) {
-							m_crossSections[child] = MakeCrossSection(child->get_Value(), math::direction(child->get_Value(), node->get_Value()), m_branchWidths[child]);
+							//m_crossSections[child] = MakeCrossSection(child->get_Value(), m_directions[child], m_referenceVec[child], m_branchWidths[child]);
 							queue.push(child);
 						}
 					}
 				}
+
+				/*for (auto cs = m_crossSections.begin(); cs != m_crossSections.end(); cs++) {
+					CloseCrossSection(cs->second);
+				}*/
+			}
+
+			void TileJoint(std::shared_ptr<Node> parent) {
+				// TODO: should be a set
+				std::list<std::shared_ptr<Node>> children = parent->get_Children();
+				std::shared_ptr<Node> strChild = FindStraightestChild(m_directions[parent], children);
+				children.remove(strChild);
+
+				std::list<std::shared_ptr<Node>> quadrantChildren[4];
+
+				for (auto child : children) {
+					quadrantChildren[m_crossSections[strChild].closestQuadrant(math::projectToPlane(m_directions[strChild], m_directions[child]))].push_back(child);
+				}
+
+				for (int i = 0; i < 4; i++) {
+					if (quadrantChildren[i].empty()) {
+						CloseQuadrant(m_crossSections[parent], m_crossSections[strChild], i);
+					}
+					else {
+						Mesh::VertexHandle vertices[4] = {
+							m_crossSections[strChild].vertices[(i + 1) % 4],
+							m_crossSections[strChild].vertices[i],
+							m_crossSections[parent].vertices[i],
+							m_crossSections[parent].vertices[(i + 1) % 4]
+						};
+
+						TileJoint(parent, quadrantChildren[i], i, strChild, vertices);
+					}
+				}
+			}
+
+			void TileJoint(std::shared_ptr<Node> parent, std::list<std::shared_ptr<Node>> children, int fromQuadrant, std::shared_ptr<Node> connectTo, Mesh::VertexHandle vertices[4]) {
+				std::shared_ptr<Node> strChild = FindStraightestChild(m_directions[parent], children);
+				children.remove(strChild);
+
+				std::list<std::shared_ptr<Node>> quadrantChildren[4];
+
+				for (auto child : children) {
+					quadrantChildren[m_crossSections[strChild].closestQuadrant(math::projectToPlane(m_directions[strChild], m_directions[child]))].push_back(child);
+				}
+
+				for (int i = 0; i < 4; i++) {
+					Mesh::VertexHandle vertex[4];
+					if (i == fromQuadrant) {
+						vertex[0] = m_crossSections[strChild].vertices[(i + 1) % 4];
+						vertex[1] = m_crossSections[strChild].vertices[i];
+						vertex[2] = vertices[2];
+						vertex[3] = vertices[3];
+					}
+					else if (i == (fromQuadrant + 1) % 4) {
+						vertex[0] = m_crossSections[strChild].vertices[(i + 1) % 4];
+						vertex[1] = m_crossSections[strChild].vertices[i];
+						vertex[2] = vertices[3];
+						vertex[3] = vertices[0];
+					}
+					else if (i == (fromQuadrant - 1) % 4) {
+						vertex[0] = m_crossSections[strChild].vertices[(i + 1) % 4];
+						vertex[1] = m_crossSections[strChild].vertices[i];
+						vertex[2] = vertices[1];
+						vertex[3] = vertices[2];
+					}
+					else {
+						continue;
+					}
+
+					if (quadrantChildren[i].empty() && i != (fromQuadrant + 2) % 4) {
+						ClosePatch(vertex);
+					}
+					else {
+						TileJoint(parent, quadrantChildren[i], i, strChild, vertex);
+					}
+				}
+
+				MakeTransitionPatch(m_crossSections[connectTo], fromQuadrant, m_crossSections[strChild], (fromQuadrant + 2) % 4);
+			}
+
+			void MakeTransitionPatch(CrossSection cs1, int quadrant1, CrossSection cs2, int quadrant2) {
+				if (quadrant1 == 1 && quadrant2 == 3) {
+					m_pMesh->add_face(cs1.vertices[2], cs1.vertices[1], cs2.vertices[0], cs2.vertices[3]);
+					//m_pMesh->add_face(cs1.vertices[1], cs2.vertices[3], cs2.vertices[0]);
+					//m_pMesh->add_face(cs1.vertices[1], cs2.vertices[3], cs1.vertices[2]);
+				}
+				else if (quadrant1 == 3 && quadrant2 == 1) {
+					m_pMesh->add_face(cs1.vertices[0], cs1.vertices[3], cs2.vertices[2], cs2.vertices[1]);
+					//m_pMesh->add_face(cs1.vertices[0], cs2.vertices[2], cs2.vertices[1]);
+					//m_pMesh->add_face(cs1.vertices[0], cs2.vertices[2], cs1.vertices[3]);
+				}
+				else if (quadrant1 == 0 && quadrant2 == 2) {
+					m_pMesh->add_face(cs1.vertices[1], cs1.vertices[0], cs2.vertices[3], cs2.vertices[2]);
+				}
+				else if (quadrant1 == 2 && quadrant2 == 0) {
+					m_pMesh->add_face(cs1.vertices[3], cs1.vertices[2], cs2.vertices[1], cs2.vertices[0]);
+				}
+			}
+
+			void CloseQuadrant(CrossSection cs1, CrossSection cs2, int quadrant) {
+				m_pMesh->add_face(cs1.vertices[quadrant], cs1.vertices[(quadrant + 1) % 4], cs2.vertices[(quadrant + 1) % 4], cs2.vertices[quadrant]);
+			}
+
+			void ClosePatch(Mesh::VertexHandle v[4]) {
+				m_pMesh->add_face(v[0], v[1], v[2], v[3]);
 			}
 
 			float DetermineBranchWidth(std::shared_ptr<Node> node, float leafWidth) {
@@ -91,12 +205,53 @@ namespace fli {
 				return radius;
 			}
 
-			std::shared_ptr<Node> FindStraightestChild(const glm::vec3& dir, glm::vec3 fromPoint, std::list<std::shared_ptr<Node>> childrenPoints) {
+			void DetermineDirection(std::shared_ptr<Node> node) {
+				if (node == nullptr)
+					return;
+				if (node->get_Children().size() == 0)
+					return;
+				for (std::shared_ptr<Node> child : node->get_Children()) {
+					m_directions[child] = math::direction(child->get_Value(), node->get_Value());
+					DetermineDirection(child);
+				}
+			}
+
+			void DetermineReferenceVectors(std::shared_ptr<Node> node) {
+				if (node == nullptr)
+					return;
+				if (node->get_Children().size() == 0)
+					return;
+				for (std::shared_ptr<Node> child : node->get_Children()) {
+					m_referenceVec[child] = glm::normalize(math::projectToPlane(glm::normalize(m_directions[child]), glm::normalize(m_referenceVec[node])));
+					DetermineReferenceVectors(child);
+				}
+			}
+
+			void DetermineCrossSections(std::shared_ptr<Node> node, glm::vec3 ref) {
+				if (node == nullptr) 
+					return;
+
+				std::queue<std::shared_ptr<Node>> queue;
+				queue.push(node);
+
+				while (!queue.empty()) {
+					std::shared_ptr<Node> current = queue.front();
+					queue.pop();
+
+					m_crossSections[current] = MakeCrossSection(current->get_Value(), m_directions[current], m_referenceVec[current], m_branchWidths[current]);
+					
+					for (auto child : current->get_Children()) {
+						queue.push(child);
+					}
+				}
+			}
+
+			std::shared_ptr<Node> FindStraightestChild(const glm::vec3& dir, std::list<std::shared_ptr<Node>> childrenPoints) {
  				std::shared_ptr<Node> straightestChild = nullptr;
 				float maxDot = 0;
 
 				for (std::shared_ptr<Node> child : childrenPoints) {
-					float dot = glm::dot(math::direction(child->get_Value(), fromPoint), glm::normalize(dir));
+					float dot = glm::dot(m_directions[child], glm::normalize(dir));
 
 					if (dot > maxDot) {
 						straightestChild = child;
@@ -164,20 +319,13 @@ namespace fli {
 
 			// Make Geometry Functions
 			void CloseCrossSection(const CrossSection& crossSection) {
-				m_pMesh->add_face(crossSection.vertices[0], crossSection.vertices[2], crossSection.vertices[1]);
-				m_pMesh->add_face(crossSection.vertices[0], crossSection.vertices[3], crossSection.vertices[2]);
+				m_pMesh->add_face(crossSection.vertices[0], crossSection.vertices[1], crossSection.vertices[2], crossSection.vertices[3]);
+				/*m_pMesh->add_face(crossSection.vertices[0], crossSection.vertices[1], crossSection.vertices[2]);
+				m_pMesh->add_face(crossSection.vertices[0], crossSection.vertices[2], crossSection.vertices[3]);*/
 			}
 
-			CrossSection MakeCrossSection(const glm::vec3 point, glm::vec3 dir, float radius) {
-				glm::vec3 p0 = FindPerpendicular(dir, m_referenceVector);
-				glm::vec3 p1 = FindPerpendicular(dir, p0);
-
-				glm::vec3 a = point + p1 * radius;
-				glm::vec3 b = point + p0 * radius;
-				glm::vec3 c = point - p1 * radius;
-				glm::vec3 d = point - p0 * radius;
-
-				return MakeCrossSection(a, b, c, d);
+			CrossSection MakeCrossSection(glm::vec3 pos, glm::vec3 dir, glm::vec3 ref, float radius) {
+				return CrossSection(m_pMesh, pos, dir, ref, radius);
 			}
 
 			CrossSection MakeCrossSection(Mesh::VertexHandle v0, Mesh::VertexHandle v1, Mesh::VertexHandle v2, Mesh::VertexHandle v3) {
@@ -189,25 +337,29 @@ namespace fli {
 				return cs;
 			}
 
-			CrossSection MakeTube(const CrossSection& baseCrossSection, const glm::vec3& fromPoint, const glm::vec3& toPoint, float radius) {
-				glm::vec3 dir = toPoint - fromPoint;
-				CrossSection endCrossSection = MakeCrossSection(toPoint, dir, radius);
-				MakeTube(baseCrossSection, endCrossSection);
-				return endCrossSection;
-			}
+			//CrossSection MakeTube(const CrossSection& baseCrossSection, const glm::vec3& fromPoint, const glm::vec3& toPoint, float radius) {
+			//	glm::vec3 dir = toPoint - fromPoint;
+			//	CrossSection endCrossSection = MakeCrossSection(toPoint, dir, radius);
+			//	MakeTube(baseCrossSection, endCrossSection);
+			//	return endCrossSection;
+			//}
 
 			void MakeTube(const CrossSection& cs1, const CrossSection& cs2) {
-				m_pMesh->add_face(cs1.vertices[1], cs1.vertices[0], cs2.vertices[1]);
-				m_pMesh->add_face(cs1.vertices[0], cs2.vertices[0], cs2.vertices[1]);
-
-				m_pMesh->add_face(cs1.vertices[2], cs1.vertices[1], cs2.vertices[2]);
-				m_pMesh->add_face(cs1.vertices[1], cs2.vertices[1], cs2.vertices[2]);
-
-				m_pMesh->add_face(cs1.vertices[3], cs1.vertices[2], cs2.vertices[3]);
-				m_pMesh->add_face(cs1.vertices[2], cs2.vertices[2], cs2.vertices[3]);
-
-				m_pMesh->add_face(cs1.vertices[0], cs1.vertices[3], cs2.vertices[0]);
-				m_pMesh->add_face(cs1.vertices[3], cs2.vertices[3], cs2.vertices[0]);
+				m_pMesh->add_face(cs1.vertices[0], cs1.vertices[1], cs2.vertices[1], cs2.vertices[0]);
+				m_pMesh->add_face(cs1.vertices[1], cs1.vertices[2], cs2.vertices[2], cs2.vertices[1]);
+				m_pMesh->add_face(cs1.vertices[2], cs1.vertices[3], cs2.vertices[3], cs2.vertices[2]);
+				m_pMesh->add_face(cs1.vertices[3], cs1.vertices[0], cs2.vertices[0], cs2.vertices[3]);
+				//m_pMesh->add_face(cs1.vertices[0], cs1.vertices[1], cs2.vertices[1]);
+				//m_pMesh->add_face(cs1.vertices[0], cs2.vertices[1], cs2.vertices[0]);
+				//
+				//m_pMesh->add_face(cs1.vertices[1], cs1.vertices[2], cs2.vertices[2]);
+				//m_pMesh->add_face(cs1.vertices[1], cs2.vertices[2], cs2.vertices[1]);
+				//
+				//m_pMesh->add_face(cs1.vertices[2], cs1.vertices[3], cs2.vertices[3]);
+				//m_pMesh->add_face(cs1.vertices[2], cs2.vertices[3], cs2.vertices[2]);
+				//
+				//m_pMesh->add_face(cs1.vertices[3], cs1.vertices[0], cs2.vertices[0]);
+				//m_pMesh->add_face(cs1.vertices[3], cs2.vertices[0], cs2.vertices[3]);
 			}
 
 			glm::vec3 FindPerpendicular(glm::vec3 p, glm::vec3 q) {
