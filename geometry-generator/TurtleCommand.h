@@ -15,12 +15,9 @@ namespace fli {
 			bool m_pushState;
 
 		public:
-			TurtleCommand(std::function<void(TurtleState&)> command, bool shouldRecordState)
-				: m_internalCommand(command), m_shouldRecordState(shouldRecordState) { }
+			TurtleCommand(std::function<void(TurtleState&)> command, bool shouldRecordState);
 
-			void Execute(Turtle& turtle) {
-				turtle.ExecuteCommand(m_internalCommand, m_shouldRecordState);
-			}
+			void Execute(Turtle& turtle);
 		};
 	}
 }

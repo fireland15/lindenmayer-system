@@ -281,8 +281,8 @@ namespace geometrygeneratortest {
 
 		TEST_METHOD(TestSmooth2) {
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-p(22.5)-B()-B()-f(a)-b()-P(22.5)-f(a)-b()-P(22.5)-F(a)-B()-P(22.5)-F(a)-f(a)-b()-p(22.5)-f(a)"))));
-			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-Y(30)-F(a/3)-F(a/3)-f(a/2)-b()-B()-y(30)-F(a/3)-F(a/3)-f(a/2)-b()-F(a)-f(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)"))));
 			LindenmayerString lString;
 			lString.Add(LindenmayerSymbol('f', { 10 }));
 

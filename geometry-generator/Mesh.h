@@ -1,6 +1,6 @@
 #pragma once
 
-#include <OpenMesh\Core\Mesh\TriMesh_ArrayKernelT.hh>
+#include <OpenMesh\Core\Mesh\PolyMesh_ArrayKernelT.hh>
 
 namespace fli {
 	namespace geometry_generator {

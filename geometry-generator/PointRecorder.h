@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "TurtleState.h"
+#include "BaseRecorder.h"
 
 namespace fli {
 	namespace geometry_generator {
@@ -10,13 +11,8 @@ namespace fli {
 		private:
 			std::vector<TurtleState> m_records;
 		public:
-			virtual void Record(TurtleState state) {
-				m_records.push_back(state);
-			}
-
-			std::vector<TurtleState>& GetRecords() {
-				return m_records;
-			}
+			virtual void Record(TurtleState state);
+			std::vector<TurtleState>& GetRecords();
 		};
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <functional>
 
 #include "BaseRecorder.h"
 #include "TurtleState.h"
@@ -13,26 +14,14 @@ namespace fli {
 			std::shared_ptr<BaseRecorder> mp_stateRecorder;
 
 		public:
-			Turtle(TurtleState initialState, std::shared_ptr<BaseRecorder> recorder)
-				: m_state(initialState), mp_stateRecorder(recorder) {
-				mp_stateRecorder->Record(initialState);
-			}
+			Turtle(TurtleState initialState, std::shared_ptr<BaseRecorder> recorder);
 
-			TurtleState GetState() {
-				return m_state;
-			}
+			TurtleState GetState();
 
-			virtual void ExecuteCommand(std::function<void(TurtleState&)> func, bool shouldRecord) {
-				func(m_state);
-				if (shouldRecord) {
-					PostExecute();
-				}
-			}
+			virtual void ExecuteCommand(std::function<void(TurtleState&)> func, bool shouldRecord);
 
 		private:
-			virtual void PostExecute() {
-				mp_stateRecorder->Record(m_state);
-			}
+			virtual void PostExecute();
 		};
 	}
 }

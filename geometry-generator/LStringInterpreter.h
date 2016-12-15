@@ -1,6 +1,6 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
+//#define _USE_MATH_DEFINES
 
 #include <memory>
 #include <OpenMesh\Core\Mesh\PolyMesh_ArrayKernelT.hh>
@@ -30,50 +30,13 @@ namespace fli {
 			GeometryType m_geometryType;
 
 		public:
-			LStringInterpreter()
-				: m_commandFactory(TurtleCommandFactory(std::unique_ptr<ITurtleCommandSet>(new VertexTurtleCommandSet()))) {
-				mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Point);
-				mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
-			}
+			LStringInterpreter();
 
-			LStringInterpreter(RecorderType recorderType)
-				: m_commandFactory(TurtleCommandFactory(std::unique_ptr<ITurtleCommandSet>(new VertexTurtleCommandSet()))) {
-				mp_recorder = RecorderFactory::MakeRecorder(recorderType);
-				mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
-			}
+			LStringInterpreter(RecorderType recorderType);
 
-			LStringInterpreter(GeometryType geometryType)
-				: m_commandFactory(TurtleCommandFactory(std::unique_ptr<ITurtleCommandSet>(new VertexTurtleCommandSet()))) {
-				m_geometryType = geometryType;
+			LStringInterpreter(GeometryType geometryType);
 
-				switch (geometryType) {
-				case GeometryType::Points:
-					mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Point);
-					break;
-				case GeometryType::Tubes:
-				case GeometryType::Smooth:
-					mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Graph);
-					break;
-				default:
-					mp_recorder = RecorderFactory::MakeRecorder(RecorderType::Empty);
-					break;
-				}
-				mp_turtle = TurtleFactory::MakeTurtle(mp_recorder);
-			}
-
-			std::unique_ptr<Mesh> Interpret(const LindenmayerString& lString) {
-				// Todo: Interpret l string.
-				LindenmayerString::ConstIterator it = lString.Begin();
-				while (!it.AtEnd()) {
-					TurtleCommand command = m_commandFactory.BuildCommand(*it);
-					command.Execute(*mp_turtle);
-					it.operator++();
-				}
-
-				RecordInterpreter interpreter;
-				std::unique_ptr<Mesh> mesh = interpreter.Interpret(mp_recorder, m_geometryType);
-				return mesh;
-			}
+			std::unique_ptr<Mesh> Interpret(const LindenmayerString& lString);
 		};
 	}
 }

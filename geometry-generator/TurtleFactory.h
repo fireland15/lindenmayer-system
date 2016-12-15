@@ -4,6 +4,7 @@
 
 #include "BaseRecorder.h"
 #include "TurtleState.h"
+#include "Turtle.h"
 
 namespace fli {
 	namespace geometry_generator {
@@ -11,17 +12,10 @@ namespace fli {
 		private:
 
 		public:
-			static std::unique_ptr<Turtle> MakeTurtle(std::shared_ptr<BaseRecorder> pRecorder) {
-				return std::unique_ptr<Turtle>(new Turtle(MakeInitState(), pRecorder));
-			}
+			static std::unique_ptr<Turtle> MakeTurtle(std::shared_ptr<BaseRecorder> pRecorder);
 
 		private:
-			static TurtleState MakeInitState() {
-				TurtleState initState;
-				initState.position = glm::vec3(0.0f, 0.0f, 0.0f);
-				initState.orientation = glm::vec3(0.0f, 1.0f, 0.0f);
-				return initState;
-			}
+			static TurtleState MakeInitState();
 		};
 	}
 }

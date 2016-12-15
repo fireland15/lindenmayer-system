@@ -33,3 +33,7 @@ int LindenmayerSystem::SelectRule(LindenmayerString::Iterator& it) {
 	}
 	return -1;
 }
+
+void LindenmayerSystem::AddRule(ProductionRule rule) {
+	m_rules.push_back(std::move(rule));
+}

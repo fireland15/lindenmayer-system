@@ -13,6 +13,7 @@ private:
 public:
 	LindenmayerSystem(LindenmayerString axiom, std::vector<ProductionRule> rules);
 	LindenmayerString Run(unsigned int iterations);
+	void AddRule(ProductionRule rule);
 
 private:
 	/// <summary>

@@ -55,6 +55,19 @@ namespace fli {
 
 				return (glm::dot(projOnto, v) / (projOnto.length() * projOnto.length())) * projOnto;
 			}
+
+			inline glm::vec3 makeOrthogonal(glm::vec3 a) {
+				glm::vec3 arr[2];
+				arr[0] = glm::vec3(a.z, a.z, -(a.x + a.y));
+				arr[1] = glm::vec3(-(a.y + a.z), a.x, a.x);
+
+				int index = ((a.z != 0) && (-a.x != a.y));
+				return glm::normalize(arr[index]);
+			}
+
+			inline glm::vec3 makeOrthogonal(glm::vec3 a, glm::vec3 b) {
+				return glm::normalize(glm::cross(a, b));
+			}
 		}
 	}
 }
