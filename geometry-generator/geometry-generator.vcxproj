@@ -32,6 +32,7 @@
     <ClInclude Include="RecorderFactory.h" />
     <ClInclude Include="TileTree.h" />
     <ClInclude Include="Turtle.h" />
+    <ClInclude Include="TurtleCentricCommandSet.h" />
     <ClInclude Include="TurtleCommand.h" />
     <ClInclude Include="TurtleCommandFactory.h" />
     <ClInclude Include="RecordInterpreter.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="RecordInterpreter.cpp" />
     <ClCompile Include="TileTree.cpp" />
     <ClCompile Include="Turtle.cpp" />
+    <ClCompile Include="TurtleCentricCommandSet.cpp" />
     <ClCompile Include="TurtleCommand.cpp" />
     <ClCompile Include="TurtleCommandFactory.cpp" />
     <ClCompile Include="TurtleFactory.cpp" />

@@ -3,7 +3,11 @@
 namespace fli {
 	namespace geometry_generator {
 		GeometryGenerator::GeometryGenerator(GeometryType geometryType) {
-			switch (geometryType) {
+			m_geometryType = geometryType;
+
+			m_interpreter = LStringInterpreter(geometryType);
+
+			/*switch (geometryType) {
 			case GeometryType::Points:
 				m_interpreter = LStringInterpreter(RecorderType::Point);
 				break;
@@ -18,11 +22,15 @@ namespace fli {
 				break;
 			default:
 				break;
-			}
+			}*/
 		}
 
 		std::unique_ptr<Mesh> GeometryGenerator::Generate(const LindenmayerString& lString) {
 			return m_interpreter.Interpret(lString);
+		}
+
+		void GeometryGenerator::set_InterpreterRules(TurtleCommandSetType commandSetType) {
+			m_interpreter.set_CommandSetType(commandSetType);
 		}
 	}
 }

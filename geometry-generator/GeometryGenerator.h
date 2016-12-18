@@ -15,11 +15,14 @@ namespace fli {
 		class GeometryGenerator {
 		private:
 			LStringInterpreter m_interpreter;
+			GeometryType m_geometryType;
 
 		public:
 			GeometryGenerator(GeometryType geometryType);
 
 			std::unique_ptr<Mesh> Generate(const LindenmayerString& lString);
+
+			void set_InterpreterRules(TurtleCommandSetType commandSetType);
 		};
 	}
 }

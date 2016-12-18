@@ -19,5 +19,10 @@ namespace fli {
 			Base,
 			ListRecorded
 		};
+
+		enum class TurtleCommandSetType {
+			TurtleCentric,
+			WorldCentric
+		};
 	}
 }

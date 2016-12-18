@@ -1,7 +1,5 @@
 #pragma once
 
-//#define _USE_MATH_DEFINES
-
 #include <memory>
 #include <OpenMesh\Core\Mesh\PolyMesh_ArrayKernelT.hh>
 
@@ -15,6 +13,7 @@
 #include "BaseRecorder.h"
 #include "RecorderFactory.h"
 #include "VertexTurtleCommandSet.h"
+#include "TurtleCentricCommandSet.h"
 #include "RecordInterpreter.h"
 #include "Mesh.h"
 #include "Enums.h"
@@ -28,6 +27,7 @@ namespace fli {
 			std::shared_ptr<BaseRecorder> mp_recorder;
 
 			GeometryType m_geometryType;
+			TurtleCommandSetType m_commandSetType;
 
 		public:
 			LStringInterpreter();
@@ -37,6 +37,10 @@ namespace fli {
 			LStringInterpreter(GeometryType geometryType);
 
 			std::unique_ptr<Mesh> Interpret(const LindenmayerString& lString);
+
+			void set_CommandSetType(TurtleCommandSetType commandSetType);
+
+			TurtleCommandSetType get_CommandSetType();
 		};
 	}
 }

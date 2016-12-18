@@ -10,8 +10,9 @@ namespace fli {
 		struct TurtleState {
 			glm::vec3 orientation;
 			glm::vec3 position;
+			glm::vec3 up;
 
-			std::stack<std::tuple<glm::vec3, glm::vec3>> m_stateStack;
+			std::stack<std::tuple<glm::vec3, glm::vec3, glm::vec3>> m_stateStack;
 
 			TurtleState();
 

@@ -14,6 +14,7 @@
 #include "../lindenmayer-system/production-rule.h"
 #include "../lindenmayer-system/lindenmayer-system.h"
 #include "../geometry-generator/Mesh.h"
+#include "../geometry-generator/GeometryGenerator.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace fli::geometry_generator;
@@ -281,7 +282,7 @@ namespace geometrygeneratortest {
 
 		TEST_METHOD(TestSmooth2) {
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-Y(30)-F(a/3)-F(a/3)-f(a/2)-b()-B()-y(30)-F(a/3)-F(a/3)-f(a/2)-b()-F(a)-f(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-P(10)-Y(30)-F(a/3)-F(a/3)-f(a/2)-b()-B()-p(10)-y(30)-F(a/3)-F(a/3)-f(a/2)-b()-F(a)-f(a)"))));
 			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)"))));
 			LindenmayerString lString;
 			lString.Add(LindenmayerSymbol('f', { 10 }));
@@ -301,6 +302,39 @@ namespace geometrygeneratortest {
 			try
 			{
 				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "testsmooth2.obj", OpenMesh::IO::Options::ColorFloat))
+				{
+					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
+				}
+			}
+			catch (std::exception& x)
+			{
+				std::cerr << x.what() << std::endl;
+			}
+		}
+
+		TEST_METHOD(GeomGen) {
+			std::vector<ProductionRule> rules;
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-Y(45)-F(a)-b()-B()-y(45)-F(a)-b()-F(a)-R(30)-B()-P(45)-F(a)-b()-B()-p(45)-F(a)-b()-f(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
+			LindenmayerString lString;
+			lString.Add(LindenmayerSymbol('f', { 10 }));
+
+			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
+			LindenmayerString result = system.Run(4);
+
+			GeometryGenerator geomgen(GeometryType::Smooth);
+			geomgen.set_InterpreterRules(TurtleCommandSetType::TurtleCentric);
+			std::unique_ptr<Mesh> mesh = geomgen.Generate(result);
+
+			OpenMesh::Subdivider::Uniform::CatmullClarkT<Mesh> catmull;
+
+			catmull.attach(*mesh);
+			catmull(1);
+			catmull.detach();
+
+			try
+			{
+				if (!OpenMesh::IO::write_mesh(mesh.operator*(), "GeomGen.obj", OpenMesh::IO::Options::ColorFloat))
 				{
 					std::cerr << "Cannot write mesh to file 'output.obj'" << std::endl;
 				}
