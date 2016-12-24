@@ -314,13 +314,13 @@ namespace geometrygeneratortest {
 
 		TEST_METHOD(GeomGen) {
 			std::vector<ProductionRule> rules;
-			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : F(a)-B()-Y(45)-F(a)-b()-B()-y(45)-F(a)-b()-F(a)-R(30)-B()-P(45)-F(a)-b()-B()-p(45)-F(a)-b()-f(a)"))));
-			rules.push_back(std::move(CreateProductionRule(std::string("F(a) : F(a)-F(a)"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("F() < f(a) : f(a)-R(44)-B()-P(25)-F(a)-F(a)-b()"))));
+			rules.push_back(std::move(CreateProductionRule(std::string("f(a) : R(44)-B()-P(80)-F(a)-F(a)-f(a)-b()-f(a)"))));
 			LindenmayerString lString;
 			lString.Add(LindenmayerSymbol('f', { 10 }));
 
 			LindenmayerSystem system = LindenmayerSystem(lString, std::move(rules));
-			LindenmayerString result = system.Run(4);
+			LindenmayerString result = system.Run(8);
 
 			GeometryGenerator geomgen(GeometryType::Smooth);
 			geomgen.set_InterpreterRules(TurtleCommandSetType::TurtleCentric);
@@ -328,9 +328,9 @@ namespace geometrygeneratortest {
 
 			OpenMesh::Subdivider::Uniform::CatmullClarkT<Mesh> catmull;
 
-			catmull.attach(*mesh);
-			catmull(1);
-			catmull.detach();
+			//catmull.attach(*mesh);
+			//catmull(2);
+			//catmull.detach();
 
 			try
 			{

@@ -5,7 +5,7 @@ namespace fli {
 		TileTree::TileTree(Graph<float, glm::vec3> tree)
 			: m_tree(tree) {
 			m_pMesh = new Mesh;
-			m_referenceVector = glm::normalize(glm::vec3(1.0F, 0.0F, 1.0F));
+			m_referenceVector = glm::normalize(glm::vec3(1.0F, 0.0F, 0.677F));
 		}
 
 		std::unique_ptr<Mesh> TileTree::Tile() {
@@ -118,7 +118,7 @@ namespace fli {
 					vertex[2] = vertices[3];
 					vertex[3] = vertices[0];
 				}
-				else if (i == (fromQuadrant - 1) % 4) {
+				else if (i == (fromQuadrant + 3) % 4) {
 					vertex[0] = m_crossSections[strChild].vertices[(i + 1) % 4];
 					vertex[1] = m_crossSections[strChild].vertices[i];
 					vertex[2] = vertices[1];
